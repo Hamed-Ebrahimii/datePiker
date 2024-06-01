@@ -2,6 +2,7 @@ import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian"
 import { DatePikerProps } from "../type";
 import persian_fa from "react-date-object/locales/persian_fa"
+import Day from "./day";
 const Calendar = (props : DatePikerProps) =>{
     
     return(
@@ -22,11 +23,11 @@ const Calendar = (props : DatePikerProps) =>{
                             {
                              props.weekDayString ?  props.weekDayString?.map(item => (<div>{item}</div>)) : new DateObject({calendar : props.calendar === 'persian' ? persian : undefined , locale : persian_fa}).weekDays.map(item => (<div>{item.name}</div>))
                             }
-                            <div>
-                                {
-                                    new DateObject({calendar : props.calendar === 'persian'? persian : undefined , locale : persian_fa}).toFirstOfMonth().format('d')
-                                }
-                            </div>
+                            
+                               {
+                                 Array.from<number>({length : 30}).map((item , index) => (<Day day={index + 1}/>) )
+                               }
+                            
                     </div>
         </div>
     )
