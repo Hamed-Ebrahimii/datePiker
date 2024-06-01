@@ -17,7 +17,7 @@ const DatePiker = ({calendar , inputDate} : DatePikerProps) =>{
                     inputDate && <Input onClick={handleShowCalendar} placeholder="hello" />
                 }
                 {
-                    !showCalendar && <Calendar calendar={calendar} inputDate datePiker/>
+                    !showCalendar && <Calendar calendar={calendar}  inputDate datePiker/>
                 }
                 
                     
