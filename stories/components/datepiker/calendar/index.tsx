@@ -4,7 +4,7 @@ import {DatePikerProps} from "../type";
 import persian_fa from "react-date-object/locales/persian_fa"
 import Day from "./day";
 import { useState } from "react";
-const Calendar = ({calendar , inputDate , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , datePiker , maxDate , minDate , holidays , selected , weekendOff}: DatePikerProps) => {
+const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , datePiker , maxDate , minDate , holidays = [] , selected , weekendOff}: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false)
     const [showYear, setShowYear] = useState(false)
     const [currentMonth, setCurrentMonth] = useState(new DateObject({
@@ -65,15 +65,18 @@ const Calendar = ({calendar , inputDate , disablingThePreviousDay , weekStartDay
                     </thead>
 
                     <tbody>
-                    {today.weekDays.map((weekDay, weekIndex) => (
+                    {Array.from({length : 5}).map((weekDay, weekIndex) => (
                         <tr key={weekIndex}>
                             {Array.from({ length: 7 }).map((_, dayIndex) => {
-                                const day = new DateObject(currentMonth).add(weekIndex * 7 + dayIndex - currentMonth.weekDay.index, 'day');
+                                const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
+                                const day = new DateObject(currentMonth).add(weekIndex * 7 + realDayIndex - currentMonth.weekDay.index, 'day');
+                                const isWeekendOff = weekendOff && (realDayIndex === 5 || realDayIndex === 6);
                                 const isDisabled = disablingThePreviousDay ? day.valueOf() < today.valueOf() : false;
-
+                                const isHoliday = holidays.includes(day.format("YYYY-MM-DD"));
+                                const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                                 return (
                                     <td className="text-center rounded-full hover:bg-blue-300" key={dayIndex}>
-                                        <Day key={dayIndex} disable={isDisabled} date={day} />
+                                        <Day isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff}/>
                                     </td>
                                 );
                             })}

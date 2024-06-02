@@ -20,5 +20,6 @@ export interface DatePikerProps {
     minDate? : string,
     maxDate? : string,
     holidays? : string[]
-    weekendOff? : boolean
+    weekendOff? : boolean,
+    disableOutOfRangeDays? : boolean
 }

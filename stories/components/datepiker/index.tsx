@@ -17,7 +17,7 @@ const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex , holida
                     inputDate && <Input onClick={handleShowCalendar} placeholder="hello" />
                 }
                 {
-                    !showCalendar && <Calendar selected={selected} calendar={calendar}  inputDate datePiker weekStartDayIndex={weekStartDayIndex}/>
+                    !showCalendar && <Calendar selected={selected} calendar={calendar}   inputDate datePiker weekStartDayIndex={weekStartDayIndex} holidays={['1403-04-12']}/>
                 }
                 
                     
