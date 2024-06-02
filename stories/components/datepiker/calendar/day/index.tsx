@@ -6,18 +6,19 @@ interface DayProps  {
     disable? : boolean
     holiday?  : boolean
     weekendOf?  : boolean
-    isOutOfRange ? : boolean
+    isOutOfRange ? : boolean,
+    isPastDay? : boolean
 }
-const Day = ({date , disable , holiday , weekendOf , isOutOfRange} : DayProps) =>{
+const Day = ({date , disable , holiday , weekendOf , isOutOfRange , isPastDay} : DayProps) =>{
     console.log(weekendOf , holiday , disable)
     return (
-        <div className={`w-full flex items-center justify-center ${disable || holiday || weekendOf || isOutOfRange && 'opacity-50'}`}>
+        <button disabled={disable || holiday || weekendOf || isOutOfRange || isPastDay} className={`w-full flex items-center justify-center ${disable || holiday || weekendOf || isOutOfRange || isPastDay && 'opacity-50'}`}>
                 <p className="text-sm font-medium text-gray-600">
                 {
                     date.day
                 }
                 </p>
-        </div>
+        </button>
     )
 }
 export default Day

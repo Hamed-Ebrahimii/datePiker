@@ -4,7 +4,7 @@ import {DatePikerProps} from "../type";
 import persian_fa from "react-date-object/locales/persian_fa"
 import Day from "./day";
 import { useState } from "react";
-const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , datePiker , maxDate , minDate , holidays = [] , selected , weekendOff}: DatePikerProps) => {
+const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , disablePastDays , maxDate , minDate , holidays = [] , selected , weekendOff}: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false)
     const [showYear, setShowYear] = useState(false)
     const [currentMonth, setCurrentMonth] = useState(new DateObject({
@@ -39,7 +39,7 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
     const orderedWeekDays = [...weekDays.slice(weekStartDayIndex || 0), ...weekDays.slice(0, weekStartDayIndex || 0)];
 
     return (
-        <div className="w-1/3 p-4 bg-gray-200 rounded-lg shadow-sm">
+        <div className="w-1/4 p-4 bg-gray-200 rounded-lg shadow-sm">
             <div className="w-full py-2 flex items-center justify-center gap-3 text-xl font-medium">
                 <p onClick={() => {setShowMonth(true) ; setShowYear(false) }}>
                     {
@@ -53,18 +53,18 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
                 </p>
             </div>
             {
-                !showMonth && !showYear && <table className="w-full">
-                    <thead>
+                !showMonth && !showYear && <table className="w-full border-separate  border-spacing-y-8">
+                    <thead className={'table-header-group mb-8'}>
                     <tr>
                         {
                             weekDayString ? weekDayString?.map(item => (
                                 <th key={item}>{item}</th>)) : orderedWeekDays.map(item => (
-                                <th key={item.index}>{item.name}</th>))
+                                <th className={'rotate-90'} key={item.index}>{item.name}</th>))
                         }
                     </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className={'mt-6 py-6'}>
                     {Array.from({length : 5}).map((weekDay, weekIndex) => (
                         <tr key={weekIndex}>
                             {Array.from({ length: 7 }).map((_, dayIndex) => {
@@ -74,9 +74,10 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
                                 const isDisabled = disablingThePreviousDay ? day.valueOf() < today.valueOf() : false;
                                 const isHoliday = holidays.includes(day.format("YYYY-MM-DD"));
                                 const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
+                                const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
                                 return (
                                     <td className="text-center rounded-full hover:bg-blue-300" key={dayIndex}>
-                                        <Day isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff}/>
+                                        <Day isPastDay={isPastDay} isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff}/>
                                     </td>
                                 );
                             })}

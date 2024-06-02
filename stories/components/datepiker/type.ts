@@ -22,4 +22,5 @@ export interface DatePikerProps {
     holidays? : string[]
     weekendOff? : boolean,
     disableOutOfRangeDays? : boolean
+    disablePastDays : boolean
 }
