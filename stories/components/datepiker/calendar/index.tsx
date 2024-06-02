@@ -17,12 +17,16 @@ const Calendar = (props: DatePikerProps) => {
         locale: persian_fa
     });
 
+    const handleMonthChange = (monthIndex : number) => {
+        setCurrentMonth(currentMonth.set('month', monthIndex).toFirstOfMonth());
+    };
+
     const nextMonth = () => {
-        setCurrentMonth(currentMonth.add(1, "month").toFirstOfMonth());
+        handleMonthChange(currentMonth.month.index + 1);
     };
 
     const prevMonth = () => {
-        setCurrentMonth(currentMonth.subtract(1, "month").toFirstOfMonth());
+        handleMonthChange(currentMonth.month.index - 1);
     };
     return (
         <div className="w-1/3 p-4 bg-gray-200 rounded-lg shadow-sm">
