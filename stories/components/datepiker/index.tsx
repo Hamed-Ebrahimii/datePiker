@@ -4,7 +4,7 @@ import { DatePikerProps } from "./type";
 import { useClickOutside } from "@mantine/hooks";
 import Calendar from "./calendar";
 
-const DatePiker = ({calendar , inputDate , selected} : DatePikerProps) =>{
+const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex} : DatePikerProps) =>{
     const [showCalendar, setShowCalendar] = useState(inputDate)
     const ref = useClickOutside(()=> setShowCalendar(false))
     const handleShowCalendar = () =>{
@@ -17,7 +17,7 @@ const DatePiker = ({calendar , inputDate , selected} : DatePikerProps) =>{
                     inputDate && <Input onClick={handleShowCalendar} placeholder="hello" />
                 }
                 {
-                    !showCalendar && <Calendar selected={selected} calendar={calendar}  inputDate datePiker/>
+                    !showCalendar && <Calendar selected={selected} calendar={calendar}  inputDate datePiker weekStartDayIndex={weekStartDayIndex}/>
                 }
                 
                     

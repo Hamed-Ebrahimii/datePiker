@@ -35,6 +35,9 @@ const Calendar = (props: DatePikerProps) => {
     const prevYear = () => {
         handleYearChange(currentMonth.year - 1);
     };
+    const weekDays = currentMonth.weekDays
+    const orderedWeekDays = [...weekDays.slice(props.weekStartDayIndex || 0), ...weekDays.slice(0, props.weekStartDayIndex || 0)];
+
     return (
         <div className="w-1/3 p-4 bg-gray-200 rounded-lg shadow-sm">
             <div className="w-full py-2 flex items-center justify-center gap-3 text-xl font-medium">
@@ -55,7 +58,7 @@ const Calendar = (props: DatePikerProps) => {
                     <tr>
                         {
                             props.weekDayString ? props.weekDayString?.map(item => (
-                                <th key={item}>{item}</th>)) : today.weekDays.map(item => (
+                                <th key={item}>{item}</th>)) : orderedWeekDays.map(item => (
                                 <th key={item.index}>{item.name}</th>))
                         }
                     </tr>

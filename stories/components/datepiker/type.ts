@@ -18,6 +18,7 @@ export interface DatePikerProps {
     displayMonthAndYearName? : boolean,
     disablingThePreviousDay? : boolean ,
     minDate? : string,
-    maxDate? : string
-
+    maxDate? : string,
+    holidays? : string[]
+    weekendOff? : boolean
 }
