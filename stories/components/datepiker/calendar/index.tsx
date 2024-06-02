@@ -39,7 +39,7 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
     const orderedWeekDays = [...weekDays.slice(weekStartDayIndex || 0), ...weekDays.slice(0, weekStartDayIndex || 0)];
 
     return (
-        <div className={`w-1/4 p-4 bg-gray-200 rounded-lg shadow-sm`}>
+        <div className={`w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
             <div className="w-full py-2 flex items-center justify-center gap-3 text-xl font-medium">
                 <p onClick={() => {setShowMonth(true) ; setShowYear(false) }}>
                     {
@@ -53,20 +53,20 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
                 </p>
             </div>
             {
-                !showMonth && !showYear && <table className="w-full border-separate  border-spacing-y-8 border-spacing-x-1">
-                    <thead className={'table-header-group mb-8'}>
-                    <tr>
+                !showMonth && !showYear && <div className="w-full border-separate  border-spacing-y-8 border-spacing-x-1">
+                    <div className={'h-20 w-full grid grid-cols-7 items-center justify-center '}>
+
                         {
                             weekDayString ? weekDayString?.map(item => (
-                                <th key={item}>{item}</th>)) : orderedWeekDays.map(item => (
-                                <th className={'rotate-90'} key={item.index}>{item.name}</th>))
+                                <div className={'-rotate-90 block text-start font-tanha'} key={item}>{item}</div>)) : orderedWeekDays.map(item => (
+                                <div className={'-rotate-90 block text-start font-tanha'} key={item.index}>{item.name}</div>))
                         }
-                    </tr>
-                    </thead>
 
-                    <tbody className={''}>
+                    </div>
+
+                    <div className={''}>
                     {Array.from({length : 5}).map((_ , weekIndex) => (
-                        <tr key={weekIndex}>
+                        <div key={weekIndex} className={'grid grid-cols-7 items-center justify-between'}>
                             {Array.from({ length: 7 }).map((_, dayIndex) => {
                                 const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
                                 const day = new DateObject(currentMonth).add(weekIndex * 7 + realDayIndex - currentMonth.weekDay.index, 'day');
@@ -76,15 +76,15 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
                                 const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                                 const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
                                 return (
-                                    <td className={''} key={dayIndex}>
+                                    <div className={''} key={dayIndex}>
                                         <Day isPastDay={isPastDay} isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff}/>
-                                    </td>
+                                    </div>
                                 );
                             })}
-                        </tr>
+                        </div>
                     ))}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             }
             {
                 showMonth && <div className="w-full grid grid-cols-4">

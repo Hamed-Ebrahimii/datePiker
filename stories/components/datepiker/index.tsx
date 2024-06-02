@@ -12,7 +12,7 @@ const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex , holida
         setShowCalendar(!showCalendar)
     }
     return (
-        <div ref={ref} className={"w-full space-y-3 font-yekan"} dir="rtl" >
+        <div ref={ref} className={"w-full space-y-3 font-yekan bg-gray-200 h-screen"} dir="rtl" >
             
                 {
                     inputDate && <Input icon={<CalendarIcon className="h-6 w-6 text-gray-500" />} onClick={handleShowCalendar} placeholder="hello" />
