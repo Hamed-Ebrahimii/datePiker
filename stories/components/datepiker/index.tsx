@@ -4,7 +4,7 @@ import { DatePikerProps } from "./type";
 import { useClickOutside } from "@mantine/hooks";
 import Calendar from "./calendar";
 import {CalendarIcon} from "@heroicons/react/24/solid";
-
+import {Yekan} from  "../../assets/font"
 const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex , holidays , disablePastDays} : DatePikerProps) =>{
     const [showCalendar, setShowCalendar] = useState(inputDate)
     const ref = useClickOutside(()=> setShowCalendar(false))
@@ -12,7 +12,7 @@ const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex , holida
         setShowCalendar(!showCalendar)
     }
     return (
-        <div ref={ref} className="w-full space-y-3" dir="rtl" >
+        <div ref={ref} className={"w-full space-y-3 font-yekan"} dir="rtl" >
             
                 {
                     inputDate && <Input icon={<CalendarIcon className="h-6 w-6 text-gray-500" />} onClick={handleShowCalendar} placeholder="hello" />

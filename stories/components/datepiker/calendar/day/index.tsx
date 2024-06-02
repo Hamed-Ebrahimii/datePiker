@@ -12,8 +12,8 @@ interface DayProps  {
 const Day = ({date , disable , holiday , weekendOf , isOutOfRange , isPastDay} : DayProps) =>{
     console.log(weekendOf , holiday , disable)
     return (
-        <button disabled={disable || holiday || weekendOf || isOutOfRange || isPastDay} className={`w-full flex items-center justify-center ${disable || holiday || weekendOf || isOutOfRange || isPastDay && 'opacity-50'}`}>
-                <p className="text-sm font-medium text-gray-600">
+        <button disabled={disable || holiday || weekendOf || isOutOfRange || isPastDay} className={`size-10 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center ${disable || holiday || weekendOf || isOutOfRange || isPastDay && 'opacity-50'}`}>
+                <p className="font-medium ">
                 {
                     date.day
                 }

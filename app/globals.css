@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'yekan';
+    src: url("public/font/BYekan+.ttf");
+}
+@font-face {
+    font-family: 'shabnam';
+    src: url("public/font/Shabnam.ttf");
+}
+@font-face {
+    font-family: 'tanha';
+    src: url("public/font/Tanha-FD.eot");
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
