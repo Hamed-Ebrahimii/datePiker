@@ -54,7 +54,7 @@ const Calendar = (props: DatePikerProps) => {
                     {today.weekDays.map((weekDay, weekIndex) => (
                         <tr key={weekIndex}>
                             {Array.from({ length: 7 }).map((_, dayIndex) => {
-                                const day = new DateObject(currentMonth).add(weekIndex * 7 + dayIndex - firstOfMonth.weekDay.index, 'day');
+                                const day = new DateObject(currentMonth).add(weekIndex * 7 + dayIndex - currentMonth.weekDay.index, 'day');
                                 const isDisabled = props.disablingThePreviousDay ? day.valueOf() < today.valueOf() : false;
 
                                 return (
