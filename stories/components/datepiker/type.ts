@@ -11,7 +11,7 @@ export interface DatePikerProps {
     onBlur? : (value : string) => void,
     onFocus? : (value : string) => void,
     datePiker  : boolean ,
-    weekStartDayIndex? :   1| 2| 3 |4| 5| 6 ,
+    weekStartDayIndex? : 0 |  1| 2| 3 |4| 5| 6 ,
     weekDayString? : string[] ,
     selected : boolean ,
     multipleChoice?  : boolean,
