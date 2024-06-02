@@ -1,18 +1,19 @@
 import {DateObject} from "react-multi-date-picker";
+import {MouseEventHandler} from "react";
 
 interface DayProps  {
     date : DateObject ,
-    onClick? : Function
+    onClick? : MouseEventHandler<HTMLButtonElement> | undefined
     disable? : boolean
     holiday?  : boolean
     weekendOf?  : boolean
     isOutOfRange ? : boolean,
     isPastDay? : boolean
+    isSelected? : boolean
 }
-const Day = ({date , disable , holiday , weekendOf , isOutOfRange , isPastDay} : DayProps) =>{
-    console.log(weekendOf , holiday , disable)
+const Day = ({date , disable , holiday , weekendOf , isOutOfRange , isPastDay , isSelected , onClick } : DayProps) =>{
     return (
-        <button disabled={disable || holiday || weekendOf || isOutOfRange || isPastDay} className={`w-full py-3 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center ${disable || holiday || weekendOf || isOutOfRange || isPastDay && 'opacity-50'}`}>
+        <button onClick={onClick} disabled={disable || holiday || weekendOf || isOutOfRange || isPastDay} className={`w-full py-3 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center ${isSelected && 'bg-green-dark text-white'} disabled:text-red-500 `}>
                 <p className="font-medium ">
                 {
                     date.day

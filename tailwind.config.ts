@@ -20,9 +20,8 @@ const config: Config = {
           }
       },
       fontFamily : {
-        yekan : 'yekan',
-        shabnam : 'shabnam',
-        tanha : 'tanha'
+        vazir : 'vazir',
+
       }
     },
   },

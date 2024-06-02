@@ -1,14 +1,24 @@
 @font-face {
-    font-family: 'yekan';
-    src: url("public/font/BYekan+.ttf");
+    font-family: 'vazir';
+    src: url("public/font/Vazirmatn-Black.woff2");
 }
 @font-face {
-    font-family: 'shabnam';
-    src: url("public/font/Shabnam.ttf");
+    font-family: 'vazir';
+    src: url("public/font/Vazirmatn-Bold.woff2");
+    font-weight: bold;
 }
 @font-face {
-    font-family: 'tanha';
-    src: url("public/font/Tanha-FD.eot");
+    font-family: 'vazir';
+    src: url("public/font/Vazirmatn-Medium.woff2");
+    font-weight: auto;
+}
+@font-face {
+    font-family: 'vazir';
+    src: url("public/font/Vazirmatn-ExtraBold.woff2");
+}
+@font-face {
+    font-family: 'vazir';
+    src: url("public/font/Vazirmatn-Light.woff2");
 }
 @tailwind base;
 @tailwind components;

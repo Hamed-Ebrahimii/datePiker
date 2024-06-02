@@ -4,14 +4,14 @@ import {DatePikerProps} from "../type";
 import persian_fa from "react-date-object/locales/persian_fa"
 import Day from "./day";
 import { useState } from "react";
-const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , disablePastDays , holidays = []  , weekendOff}: DatePikerProps) => {
+const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviousDay , weekStartDayIndex = 0 , weekDayString , disablePastDays , holidays = []  , weekendOff , multipleChoice}: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false)
     const [showYear, setShowYear] = useState(false)
     const [currentMonth, setCurrentMonth] = useState(new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
-        locale: persian_fa
+        locale: calendar === 'persian' ? persian_fa : undefined
     }).toFirstOfMonth());
-
+    const [dateObject , setDateObject] = useState<DateObject[]>([])
     const today = new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
         locale: persian_fa
@@ -35,6 +35,9 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
     const prevYear = () => {
         handleYearChange(currentMonth.year - 1);
     };
+    const handleSelectDate = (data : DateObject) =>{
+         multipleChoice ? setDateObject([...dateObject , data]) : setDateObject([data])
+    }
     const weekDays = currentMonth.weekDays
     const orderedWeekDays = [...weekDays.slice(weekStartDayIndex || 0), ...weekDays.slice(0, weekStartDayIndex || 0)];
 
@@ -55,13 +58,11 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
             {
                 !showMonth && !showYear && <div className="w-full border-separate  border-spacing-y-8 border-spacing-x-1">
                     <div className={'h-20 w-full grid grid-cols-7 items-center justify-center '}>
-
                         {
                             weekDayString ? weekDayString?.map(item => (
-                                <div className={'-rotate-90 block text-start font-tanha'} key={item}>{item}</div>)) : orderedWeekDays.map(item => (
-                                <div className={'-rotate-90 block text-start font-tanha'} key={item.index}>{item.name}</div>))
+                                <div className={'-rotate-90 block text-start font-tanha font-medium'} key={item}>{item}</div>)) : orderedWeekDays.map(item => (
+                                <div className={'-rotate-90 block text-start font-tanha font-medium'} key={item.index}>{item.name}</div>))
                         }
-
                     </div>
 
                     <div className={''}>
@@ -75,9 +76,10 @@ const Calendar = ({calendar , disableOutOfRangeDays = true , disablingThePreviou
                                 const isHoliday = holidays.includes(day.format("YYYY-MM-DD"));
                                 const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                                 const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
+                                const isSelected = dateObject.find(item => item.valueOf() === day.valueOf()) ? true : false;
                                 return (
-                                    <div className={''} key={dayIndex}>
-                                        <Day isPastDay={isPastDay} isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff}/>
+                                    <div className={''} key={day.valueOf()}>
+                                        <Day isSelected={isSelected} isPastDay={isPastDay} isOutOfRange={isOutOfRange} key={dayIndex} disable={isDisabled} date={day} holiday={isHoliday} weekendOf={isWeekendOff} onClick={()=> handleSelectDate(day)}/>
                                     </div>
                                 );
                             })}

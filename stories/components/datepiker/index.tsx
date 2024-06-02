@@ -12,13 +12,13 @@ const DatePiker = ({calendar , inputDate , selected , weekStartDayIndex , holida
         setShowCalendar(!showCalendar)
     }
     return (
-        <div ref={ref} className={"w-full space-y-3 font-yekan bg-gray-200 h-screen"} dir="rtl" >
+        <div ref={ref} className={"w-full space-y-3 font-vazir bg-gray-200 h-screen"} dir="rtl" >
             
                 {
                     inputDate && <Input icon={<CalendarIcon className="h-6 w-6 text-gray-500" />} onClick={handleShowCalendar} placeholder="hello" />
                 }
                 {
-                    !showCalendar && <Calendar selected={selected} calendar={calendar} disablePastDays={disablePastDays}   inputDate datePiker weekStartDayIndex={weekStartDayIndex} holidays={['1403-04-12']}/>
+                    !showCalendar && <Calendar selected={selected} calendar={calendar} disablePastDays={disablePastDays}  multipleChoice={true} inputDate datePiker weekStartDayIndex={weekStartDayIndex} holidays={[]} weekendOff={true} />
                 }
                 
                     
