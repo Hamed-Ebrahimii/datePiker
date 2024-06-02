@@ -16,15 +16,12 @@ const Calendar = (props: DatePikerProps) => {
         calendar: props.calendar === 'persian' ? persian : undefined,
         locale: persian_fa
     });
-
     const handleMonthChange = (monthIndex : number) => {
         setCurrentMonth(currentMonth.set('month', monthIndex).toFirstOfMonth());
     };
-
     const nextMonth = () => {
         handleMonthChange(currentMonth.month.index + 1);
     };
-
     const prevMonth = () => {
         handleMonthChange(currentMonth.month.index - 1);
     };
@@ -79,7 +76,10 @@ const Calendar = (props: DatePikerProps) => {
                             calendar: props.calendar === 'persian' ? persian : undefined,
                             locale: props.calendar === 'persian' ? persian_fa : undefined
                         }).months.map(month => (
-                            <p key={month.index} className="text-lg font-medium">
+                            <p key={month.index} className="text-lg font-medium" onClick={()=> {
+                                handleMonthChange(month.index + 1)
+                                setShowMonth(false)
+                            }}>
                                 {
                                     month.name
                                 }
