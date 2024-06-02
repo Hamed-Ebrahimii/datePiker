@@ -11,23 +11,21 @@ const Calendar = (props: DatePikerProps) => {
     const daysArray = Array.from({ length: daysMonth }, (_, index) => index + 1);
     const startDay = new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: persian_fa }).toFirstOfMonth().weekDay.index
     const calendarArray = Array(42).fill(null);
-    const [month , setMonth] = useState(0)
-    const [year , setYear] = useState(0)
     for (let i = 0; i < daysArray.length; i++) {
         calendarArray[startDay + i] = daysArray[i];
     }
-
+    const [date , setDate] = useState(new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: persian_fa }))
     return (
         <div className="w-1/3 p-4 bg-gray-200 rounded-lg shadow-sm">
             <div className="w-full py-2 flex items-center justify-center gap-3 text-xl font-medium">
                 <p onClick={() => {setShowMonth(true) ; setShowYear(false) }}>
                     {
-                        new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: props.calendar === 'persian' ? persian_fa : undefined }).month.name
+                        date.month.name
                     }
                 </p>
                 <p onClick={() => {setShowMonth(false) ; setShowYear(true) }}>
                     {
-                        new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: props.calendar === 'persian' ? persian_fa : undefined }).year
+                        date.year
                     }
                 </p>
             </div>
@@ -36,7 +34,7 @@ const Calendar = (props: DatePikerProps) => {
                     <thead>
                         <tr>
                             {
-                                props.weekDayString ? props.weekDayString?.map(item => (<th>{item}</th>)) : new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: props.calendar === 'persian' ? persian_fa : undefined }).weekDays.map(item => (<th>{item.name}</th>))
+                                props.weekDayString ? props.weekDayString?.map(item => (<th key={item}>{item}</th>)) : date.weekDays.map(item => (<th key={item.index}>{item.name}</th>))
                             }
                         </tr>
                     </thead>
@@ -45,8 +43,9 @@ const Calendar = (props: DatePikerProps) => {
                         {Array.from({ length: 6 }).map((_, weekIndex) => (
                             <tr key={weekIndex}>
                                 {Array.from({ length: 7 }).map((_, dayIndex) => {
-                                    const day = calendarArray[weekIndex * 7 + dayIndex];
-                                    return <td className="text-center rounded-full hover:bg-blue-300" key={dayIndex}>{day ? day : ''}</td>;
+                                    const day = date.set('day' , weekIndex * 7 + dayIndex)
+
+                                    return <td  className="text-center rounded-full hover:bg-blue-300" key={dayIndex}><Day key={dayIndex} disable={props.disablingThePreviousDay ? date.valueOf() < new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: persian_fa }).valueOf() : false} date={day}/></td>;
                                 })}
                             </tr>
                         ))}
@@ -58,7 +57,7 @@ const Calendar = (props: DatePikerProps) => {
                 showMonth && <div className="w-full grid grid-cols-4">
                     {
                         new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: props.calendar === 'persian' ? persian_fa : undefined }).months.map(month => (
-                            <p className="text-lg font-medium">
+                            <p key={month.index} className="text-lg font-medium">
                                 {
                                     month.name
                                 }
@@ -71,7 +70,7 @@ const Calendar = (props: DatePikerProps) => {
                 showYear && <div className="w-full grid grid-cols-4">
                     {
                             Array.from({length : (new DateObject({ calendar: props.calendar === 'persian' ? persian : undefined, locale: persian_fa }).year + 10) - (props.calendar === 'persian' ? 1300 : 1900)}).map((_ , year) => (
-                                <p className="text-lg font-medium">
+                                <p key={year} className="text-lg font-medium">
                                     {
                                       props.calendar === 'persian' ?  1300 +  year : 1900 + year
                                     }

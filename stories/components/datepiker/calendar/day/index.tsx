@@ -1,12 +1,16 @@
+import {DateObject} from "react-multi-date-picker";
+
 interface DayProps  {
-    day : number
+    date : DateObject ,
+    onClick? : Function
+    disable? : boolean
 }
-const Day = ({day} : DayProps) =>{
+const Day = ({date , disable} : DayProps) =>{
     return (
-        <div className="w-full flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-400">
+        <div className={`w-full flex items-center justify-center ${disable && 'opacity-50'}`}>
+                <p className="text-sm font-medium text-gray-600">
                 {
-                    day
+                    date.day
                 }
                 </p>
         </div>

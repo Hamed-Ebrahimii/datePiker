@@ -12,5 +12,12 @@ export interface DatePikerProps {
     onFocus? : (value : string) => void,
     datePiker  : boolean ,
     weekStartDayIndex? :   1| 2| 3 |4| 5| 6 ,
-    weekDayString? : string[]
+    weekDayString? : string[] ,
+    selected : boolean ,
+    multipleChoice?  : boolean,
+    displayMonthAndYearName? : boolean,
+    disablingThePreviousDay? : boolean ,
+    minDate? : string,
+    maxDate? : string
+
 }
