@@ -25,6 +25,16 @@ const Calendar = (props: DatePikerProps) => {
     const prevMonth = () => {
         handleMonthChange(currentMonth.month.index - 1);
     };
+    const handleYearChange = (year : number) => {
+        setCurrentMonth(currentMonth.set('year', year).toFirstOfMonth());
+    };
+    const nextYear = () => {
+        handleYearChange(currentMonth.year + 1);
+    };
+
+    const prevYear = () => {
+        handleYearChange(currentMonth.year - 1);
+    };
     return (
         <div className="w-1/3 p-4 bg-gray-200 rounded-lg shadow-sm">
             <div className="w-full py-2 flex items-center justify-center gap-3 text-xl font-medium">
