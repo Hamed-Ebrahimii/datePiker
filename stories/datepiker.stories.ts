@@ -13,6 +13,6 @@ export const DatePikerPersian : Story = {
         inputDate : true,
         inputIcon: true,
         selected : false,
-
+        weekendOff : true
     }
 } 
