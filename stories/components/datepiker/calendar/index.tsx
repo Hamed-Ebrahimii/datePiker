@@ -20,7 +20,7 @@ const Calendar = ({
                       activeDayStyle = "w-full py-3 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
                       inactiveDayStyle,
                       holidayStyle,
-                      selectedDayStyle,
+                      selectedDayStyle = "w-full py-3 text-gray-800  bg-green-dark text-white flex items-center justify-center",
                       rangeStartDayBorder,
                       rangeEndDayBorder,
                       dayItemSize,
@@ -169,7 +169,7 @@ const Calendar = ({
                 </div>
             )}
             {showMonth && (
-                <div className="w-full grid grid-cols-2 gap-2">
+                <div className="w-full grid grid-cols-2 gap-2 mt-4">
                     {currentMonth.months.map(month => (
                         <p key={month.index} className={`text-center cursor-pointer ` + monthYearClassName} style={monthYearStyle} onClick={() => { handleMonthChange(month.index + 1); setShowMonth(false); }}>
                             {month.name}

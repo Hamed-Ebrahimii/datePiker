@@ -8,9 +8,9 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
     onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void,
 }
-export const Input = ({icon , onBlur , onChange , onFocus ,  onClick ,  placeholder , value} : InputProps) =>{
+export const Input = ({icon , onBlur , onChange , onFocus ,  onClick ,  placeholder , value , className , style } : InputProps) =>{
     return (
-        <div  className="w-48 py-2 px-1 border-2 rounded-md flex items-center justify-between border border-white my-4 bg-white ">
+        <div  className={className} style={style}>
                 <input onClick={onClick} className="text-sm text-gray-400 font-medium bg-inherit border-none placeholder:text-white  outline-none" placeholder={placeholder} value={value}/>
                 {
                     icon && icon

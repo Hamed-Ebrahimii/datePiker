@@ -36,6 +36,7 @@ export interface DatePikerProps {
     weekDayStyle?: string;
     dayStyle? : CSSProperties;
     dayClassName ? : string;
-
+    inputClassName? : string;
+    inputStyle? : CSSProperties
     setValue : (value: DateObject) => void
 }
