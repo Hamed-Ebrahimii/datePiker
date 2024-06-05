@@ -43,7 +43,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     }).toFirstOfMonth());
     const [dateObject, setDateObject] = useState<DateObject[]>([]);
     const [yearPage, setYearPage] = useState(0);
-    const yearsPerPage = 12; // تعداد سال‌ها در هر صفحه
+    const yearsPerPage = 12; 
     const today = new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
         locale: calendar === 'persian' ? persian_fa : undefined
