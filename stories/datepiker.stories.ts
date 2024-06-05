@@ -11,7 +11,8 @@ export const DatePikerPersian : Story = {
     args : {
         calendar : 'persian',
         inputDate : true,
-        inputIcon: false,
-        selected : false
+        inputIcon: true,
+        selected : false,
+
     }
 } 

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import {DateObject} from "react-multi-date-picker";
 
 export interface DatePikerProps {
     calendar : 'gregorian' | 'persian',
@@ -23,4 +24,14 @@ export interface DatePikerProps {
     weekendOff? : boolean,
     disableOutOfRangeDays? : boolean
     disablePastDays : boolean
+    activeDayStyle?: string;
+    inactiveDayStyle?: string;
+    holidayStyle?: string;
+    selectedDayStyle?: string;
+    rangeStartDayBorder?: string;
+    rangeEndDayBorder?: string;
+    dayItemSize?: string | number;
+    monthYearStyle?: string;
+    weekDayStyle?: string;
+    setValue : (value: DateObject) => void
 }

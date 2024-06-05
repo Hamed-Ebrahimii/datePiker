@@ -20,6 +20,10 @@
     font-family: 'vazir';
     src: url("public/font/Vazirmatn-Light.woff2");
 }
+@font-face {
+    font-family: 'titr';
+    src: url("public/font/B Titr Bold_0.ttf");
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

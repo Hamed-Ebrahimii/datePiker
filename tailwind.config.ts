@@ -21,7 +21,7 @@ const config: Config = {
       },
       fontFamily : {
         vazir : 'vazir',
-
+        titr : 'titr'
       }
     },
   },
