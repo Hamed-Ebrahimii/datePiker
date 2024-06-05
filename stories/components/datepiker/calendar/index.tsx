@@ -13,20 +13,23 @@ const Calendar = ({
     disablingThePreviousDay,
     weekStartDayIndex = 0,
     weekDayString,
+    selected,
     disablePastDays,
     holidays = [],
     weekendOff,
     multipleChoice,
-    activeDayStyle = "w-full py-3 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
+    activeDayStyle = "w-full py-2 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
     inactiveDayStyle = "opacity-50",
     holidayStyle,
-    selectedDayStyle = "w-full py-3 text-gray-800  bg-green-dark text-white flex items-center justify-center",
+    selectedDayStyle = "w-full py-2   bg-green-dark text-white flex items-center justify-center",
     yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 ",
     yearStyle,
     dayItemSize,
     monthYearStyle,
     weekDayStyle,
     setValue,
+    weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium" , 
+    weekdaysStyle,
     monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
 }: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false);
@@ -95,7 +98,7 @@ const Calendar = ({
         setValue(dateObject[0])
     }, [dateObject])
     return (
-        <div className={`w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
+        <div className={`w-1/4 p-4 bg-white rounded-lg shadow-sm `}>
             <div className={`w-full py-2 flex items-center justify-center gap-3 text-xl font-medium relative ${monthYearStyle}`}>
                 <p onClick={() => { setShowMonth(true); setShowYear(false); }} className={'cursor-pointer'}>
                     {currentMonth.month.name}
@@ -103,7 +106,7 @@ const Calendar = ({
                 <p onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer font-titr'}>
                     {currentMonth.year}
                 </p>
-                <ChevronLeftIcon onClick={handleNext} className="size-10 text-gray-500 absolute left-0 cursor-pointer" />
+                <ChevronLeftIcon onClick={handleNext} className="size-10 text-gray-500  absolute left-0 cursor-pointer" />
                 <ChevronRightIcon onClick={handlePrev} className="size-10 text-gray-500 absolute right-0 cursor-pointer" />
             </div>
             {!showMonth && !showYear && (
@@ -111,10 +114,10 @@ const Calendar = ({
                     <div className={`h-20 w-full grid grid-cols-7 items-center justify-center ${weekDayStyle}`}>
                         {weekDayString
                             ? weekDayString.map(item => (
-                                <div className="-rotate-90 block text-start font-tanha font-medium" key={item}>{item}</div>
+                                <div className={weekdaysClassName} style={weekdaysStyle} key={item}>{item}</div>
                             ))
                             : orderedWeekDays.map(item => (
-                                <div className="-rotate-90 block text-start font-tanha font-medium" key={item.index}>{item.name}</div>
+                                <div className={weekdaysClassName} style={weekdaysStyle} key={item.index}>{item.name}</div>
                             ))
                         }
                     </div>
@@ -130,6 +133,8 @@ const Calendar = ({
                                     const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                                     const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
                                     const isSelected = dateObject.find(item => item.valueOf() === day.valueOf()) ? true : false;
+                                    const range_start = day.dayOfYear === dateObject[0]?.dayOfYear + 1
+                                    const range_end = day.daysLeft === dateObject.slice(-1)[0]?.daysLeft
                                     const dayStyle = isDisabled
                                         ? inactiveDayStyle
                                         : isHoliday
@@ -140,17 +145,23 @@ const Calendar = ({
                                     return (
                                         <div className={dayStyle} key={day.valueOf()} style={{ width: dayItemSize, height: dayItemSize }}>
                                             <Day
+                                            range_end={range_end}
+                                            range_start={range_start}
                                                 isSelected={isSelected}
                                                 isPastDay={isPastDay}
                                                 isOutOfRange={isOutOfRange}
                                                 key={dayIndex}
-                                                disable={isDisabled}
+                                                disable={isDisabled || !selected}
                                                 date={day}
                                                 holiday={isHoliday}
                                                 weekendOff={isWeekendOff}
-                                                onClick={() => handleSelectDate(day)}
+                                                onClick={() => {
+                                                    handleSelectDate(day)  
+                                                }}
                                                 activeDayStyle={activeDayStyle}
                                                 inactiveDayStyle={inactiveDayStyle}
+                                                
+                                                selectedDayStyle={selectedDayStyle}
                                             />
                                         </div>
                                     );
