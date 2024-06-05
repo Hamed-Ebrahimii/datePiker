@@ -43,12 +43,11 @@ const Calendar: React.FC<DatePikerProps> = ({
     }).toFirstOfMonth());
     const [dateObject, setDateObject] = useState<DateObject[]>([]);
     const [yearPage, setYearPage] = useState(0);
-    const yearsPerPage = 12; 
+    const yearsPerPage = 12;
     const today = new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
         locale: calendar === 'persian' ? persian_fa : undefined
     });
-
     const handleMonthChange = (monthIndex: number) => {
         setCurrentMonth(new DateObject({
             calendar: calendar === 'persian' ? persian : undefined,
@@ -56,14 +55,12 @@ const Calendar: React.FC<DatePikerProps> = ({
         }).set('month', monthIndex).toFirstOfMonth());
         setShowMonth(false);
     };
-
     const nextMonth = () => {
         handleMonthChange(currentMonth.month.number + 1);
     };
     const prevMonth = () => {
         handleMonthChange(currentMonth.month.number - 1);
     };
-
     const handleYearChange = (year: number) => {
         setCurrentMonth(new DateObject({
             calendar: calendar === 'persian' ? persian : undefined,
@@ -113,7 +110,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     }
     const isWeekend = (dayIndex: number) => {
         const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
-        return realDayIndex === 5 || realDayIndex === 6; // Adjust weekend days based on week start index
+        return realDayIndex === 5 || realDayIndex === 6;
     };
     useDidUpdate(() => {
         setCurrentMonth(new DateObject({
@@ -176,7 +173,6 @@ const Calendar: React.FC<DatePikerProps> = ({
                                                 inactiveDayStyle={inactiveDayStyle}
                                                 holidayStyle={holidayStyle}
                                                 selectedDayStyle={selectedDayStyle}
-
                                                 dayItemSize={dayItemSize}
                                             />
                                         </div>
