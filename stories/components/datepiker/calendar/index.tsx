@@ -17,7 +17,7 @@ const Calendar = ({
                       holidays = [],
                       weekendOff,
                       multipleChoice,
-                      activeDayStyle,
+                      activeDayStyle = "w-full py-3 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
                       inactiveDayStyle,
                       holidayStyle,
                       selectedDayStyle,
@@ -26,7 +26,10 @@ const Calendar = ({
                       dayItemSize,
                       monthYearStyle,
                       weekDayStyle ,
-                        setValue
+                      setValue,
+                      monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 " ,
+                        dayStyle ,
+
                   }: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
@@ -72,7 +75,7 @@ const Calendar = ({
 
     const handleSelectDate = (data: DateObject) => {
         const dateIndex = dateObject.findIndex(item => item.valueOf() === data.valueOf());
-        console.log(dateIndex)
+
         if (dateIndex >= 0){
             setDateObject(dateObject.filter(item => item.valueOf() !== data.valueOf()))
             return
@@ -155,6 +158,7 @@ const Calendar = ({
                                                 holiday={isHoliday}
                                                 weekendOff={isWeekendOff}
                                                 onClick={() => handleSelectDate(day)}
+                                                activeDayStyle={''}
                                             />
                                         </div>
                                     );
@@ -167,7 +171,7 @@ const Calendar = ({
             {showMonth && (
                 <div className="w-full grid grid-cols-2 gap-2">
                     {currentMonth.months.map(month => (
-                        <p key={month.index} className="text-lg font-medium text-center border border-green-dark py-4 rounded-lg cursor-pointer" onClick={() => { handleMonthChange(month.index + 1); setShowMonth(false); }}>
+                        <p key={month.index} className={`text-center cursor-pointer ` + monthYearClassName} style={monthYearStyle} onClick={() => { handleMonthChange(month.index + 1); setShowMonth(false); }}>
                             {month.name}
                         </p>
                     ))}

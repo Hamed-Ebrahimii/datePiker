@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import {CSSProperties, ReactNode} from "react";
 import {DateObject} from "react-multi-date-picker";
 
 export interface DatePikerProps {
@@ -31,7 +31,11 @@ export interface DatePikerProps {
     rangeStartDayBorder?: string;
     rangeEndDayBorder?: string;
     dayItemSize?: string | number;
-    monthYearStyle?: string;
+    monthYearStyle?: CSSProperties;
+    monthYearClassName? : string
     weekDayStyle?: string;
+    dayStyle? : CSSProperties;
+    dayClassName ? : string;
+
     setValue : (value: DateObject) => void
 }
