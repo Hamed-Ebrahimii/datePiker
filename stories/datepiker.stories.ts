@@ -10,10 +10,11 @@ type Story = StoryObj<typeof meta>;
 export const DatePikerPersian : Story = {
     args : {
         calendar : 'persian',
-        inputDate : false,
+        inputDate : true,
         inputIcon: true,
-        selected : false,
+        selected : true,
         weekendOff : true,
-        
+        displayMonthAndYearName : true,
+        multipleChoice : true,
     }
 } 
