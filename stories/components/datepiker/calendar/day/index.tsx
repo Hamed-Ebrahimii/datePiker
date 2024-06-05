@@ -1,5 +1,5 @@
 import {DateObject} from "react-multi-date-picker";
-import {MouseEventHandler} from "react";
+import {CSSProperties, MouseEventHandler} from "react";
 
 export interface DayProps {
     date: DateObject;
@@ -19,11 +19,14 @@ export interface DayProps {
     dayItemSize?: string | number;
     range_start? : boolean
     range_end? : boolean
+    dayStyle? : CSSProperties
 }
 
 const Day = ({date , disable , holiday , weekendOff , isOutOfRange , isPastDay , isSelected , onClick  , activeDayStyle , selectedDayStyle , inactiveDayStyle , holidayStyle , dayItemSize , rangeStartDayBorder , rangeEndDayBorder , range_end , range_start} : DayProps) =>{
+    const isDisabled = disable || holiday || weekendOff || isOutOfRange || isPastDay
+    const className = `${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-lg'} ${range_end && 'rounded-l-lg'}`
     return (
-        <button onClick={onClick} disabled={disable || holiday || weekendOff || isOutOfRange || isPastDay} className={`${isSelected && selectedDayStyle} ${activeDayStyle}  disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-lg'} ${range_end && 'rounded-l-lg'}`}>
+        <button onClick={onClick} disabled={isDisabled} className={className}>
                 <p className="font-medium font-titr">
                 {
                     date.day

@@ -16,5 +16,11 @@ export const DatePikerPersian : Story = {
         weekendOff : true,
         displayMonthAndYearName : true,
         multipleChoice : true,
+        monthYearStyle : {
+            color : "red"
+        },
+        dayStyle : {
+            borderRadius : '5px'
+        }
     }
 } 
