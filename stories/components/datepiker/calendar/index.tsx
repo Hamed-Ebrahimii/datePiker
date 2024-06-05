@@ -28,7 +28,7 @@ const Calendar = ({
                       weekDayStyle ,
                       setValue,
                       monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 " ,
-                        dayStyle ,
+                      dayStyle ,
 
                   }: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false);
