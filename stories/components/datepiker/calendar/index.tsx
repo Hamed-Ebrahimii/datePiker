@@ -2,7 +2,7 @@ import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import Day from "./day";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import { DatePikerProps } from "../type";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/16/solid";
 import {useDidUpdate} from "@mantine/hooks";
@@ -21,15 +21,13 @@ const Calendar = ({
                       inactiveDayStyle,
                       holidayStyle,
                       selectedDayStyle = "w-full py-3 text-gray-800  bg-green-dark text-white flex items-center justify-center",
-                      rangeStartDayBorder,
-                      rangeEndDayBorder,
+                      yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 ",
+                      yearStyle,
                       dayItemSize,
                       monthYearStyle,
                       weekDayStyle ,
                       setValue,
-                      monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 " ,
-                      dayStyle ,
-
+                      monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur" ,
                   }: DatePikerProps) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
@@ -171,18 +169,18 @@ const Calendar = ({
             {showMonth && (
                 <div className="w-full grid grid-cols-2 gap-2 mt-4">
                     {currentMonth.months.map(month => (
-                        <p key={month.index} className={`text-center cursor-pointer ` + monthYearClassName} style={monthYearStyle} onClick={() => { handleMonthChange(month.index + 1); setShowMonth(false); }}>
+                        <button key={month.index} className={`text-center cursor-pointer ` + monthYearClassName} style={monthYearStyle} onClick={() => { handleMonthChange(month.index + 1); setShowMonth(false); }}>
                             {month.name}
-                        </p>
+                        </button>
                     ))}
                 </div>
             )}
             {showYear && (
                 <div className="w-full grid grid-cols-2 gap-4 mt-3">
                     {Array.from({ length: 10 }).map((_, year) => (
-                        <p key={year} className="text-lg font-medium text-center border border-green-dark rounded-lg py-4 " onClick={() => { handleYearChange(year); setShowYear(false); }}>
+                        <button key={year} className={yearClassName} style={yearStyle} onClick={() => { handleYearChange(year); setShowYear(false); }}>
                             {calendar === 'persian' ? 1300 + year : 1900 + year}
-                        </p>
+                        </button>
                     ))}
                 </div>
             )}

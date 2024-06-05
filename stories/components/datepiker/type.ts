@@ -38,5 +38,7 @@ export interface DatePikerProps {
     dayClassName ? : string;
     inputClassName? : string;
     inputStyle? : CSSProperties
+    yearStyle ? : CSSProperties;
+    yearClassName? : string;
     setValue : (value: DateObject) => void
 }
