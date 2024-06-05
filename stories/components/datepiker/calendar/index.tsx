@@ -70,26 +70,20 @@ const prevMonth = () => {
     }).set('year', year).toFirstOfMonth());
     setShowYear(false);
   };
-
   const nextYear = () => {
     handleYearChange(currentMonth.year + 1);
   };
-
   const prevYear = () => {
     handleYearChange(currentMonth.year - 1);
   };
-
   const handleSelectDate = (data: DateObject) => {
     multipleChoice ? setDateObject([...dateObject, data]) : setDateObject([data]);
   };
-
   const weekDays = currentMonth.weekDays;
   const orderedWeekDays = [...weekDays.slice(weekStartDayIndex || 0), ...weekDays.slice(0, weekStartDayIndex || 0)];
-
   const renderYears = () => {
     const startYear = currentMonth.year - Math.floor(currentMonth.year % yearsPerPage);
     const years = Array.from({ length: yearsPerPage }, (_, i) => startYear + i + (yearPage * yearsPerPage));
-
     return (
       <div className="w-full grid grid-cols-4 mt-6 gap-4">
         {years.map(year => (
@@ -126,6 +120,10 @@ const isWeekend = (dayIndex: number) => {
       locale: calendar === 'persian' ? persian_fa : undefined
     }).toFirstOfMonth());
   }, [calendar]);
+  useDidUpdate(()=>{
+    console.log(dateObject);
+    
+  } , [dateObject])
   return (
     <div className={`w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
       {displayMonthAndYearName && (
@@ -160,7 +158,7 @@ const isWeekend = (dayIndex: number) => {
                   const isHoliday = holidays.includes(day.format("YYYY-MM-DD"));
                   const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                   const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
-                  const isSelected = dateObject.find(item => item.valueOf() === day.valueOf()) ? true : false;
+                  const isSelected = dateObject.find(item => item.format() === day.format()) ? true : false;
                   return (
                     <div key={day.valueOf()} className=''>
                       <Day
