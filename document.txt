@@ -1,0 +1,331 @@
+### مستندات کامپوننت Calendar
+
+این مستندات نحوه استفاده از کامپوننت تقویم `Calendar` را توضیح می‌دهد. این کامپوننت قابلیت انتخاب یک تاریخ یا یک بازه زمانی را دارا می‌باشد و می‌تواند با تقویم شمسی (فارسی) کار کند.
+
+---
+
+### استفاده از کامپوننت Calendar
+
+#### وارد کردن کامپوننت
+
+ابتدا کامپوننت `Calendar` را در پروژه خود وارد کنید:
+
+```tsx
+import Calendar from './path/to/Calendar';
+```
+
+#### استفاده از کامپوننت
+
+برای استفاده از این کامپوننت، می‌توانید آن را به شکل زیر در JSX خود قرار دهید:
+
+```tsx
+<Calendar
+    calendar="persian"
+    enableRangeSelection={true}
+    setValue={(selectedDates) => console.log(selectedDates)}
+/>
+```
+
+---
+
+### پراپس‌های Calendar
+
+این کامپوننت از چندین پراپس پشتیبانی می‌کند که به شما امکان می‌دهد رفتار و ظاهر آن را تنظیم کنید. در ادامه توضیح هر یک از این پراپس‌ها آمده است:
+
+#### calendar
+
+نوع تقویم مورد استفاده در کامپوننت را مشخص می‌کند. مقادیر ممکن:
+- `persian` : تقویم شمسی (فارسی)
+
+```tsx
+<Calendar calendar="persian" />
+```
+
+#### enableRangeSelection
+
+اگر `true` باشد، امکان انتخاب بازه زمانی فراهم می‌شود. اگر `false` باشد، تنها یک تاریخ قابل انتخاب است.
+
+نوع: `boolean`
+
+```tsx
+<Calendar enableRangeSelection={true} />
+```
+
+#### disableOutOfRangeDays
+
+اگر `true` باشد، روزهای خارج از محدوده ماه جاری غیر فعال می‌شوند.
+
+نوع: `boolean`
+
+پیش‌فرض: `true`
+
+```tsx
+<Calendar disableOutOfRangeDays={false} />
+```
+
+#### disablingThePreviousDay
+
+اگر `true` باشد، روزهای قبل از تاریخ فعلی غیر فعال می‌شوند.
+
+نوع: `boolean`
+
+```tsx
+<Calendar disablingThePreviousDay={true} />
+```
+
+#### weekStartDayIndex
+
+شاخص روز شروع هفته را مشخص می‌کند. مقادیر ممکن:
+- `0`: یکشنبه
+- `1`: دوشنبه
+- ...
+
+نوع: `number`
+
+پیش‌فرض: `0`
+
+```tsx
+<Calendar weekStartDayIndex={6} />
+```
+
+#### weekDayString
+
+آرایه‌ای از نام‌های روزهای هفته. می‌توانید نام‌ها را به فارسی یا هر زبانی که می‌خواهید تنظیم کنید.
+
+نوع: `string[]`
+
+```tsx
+<Calendar weekDayString={["ش", "ی", "د", "س", "چ", "پ", "ج"]} />
+```
+
+#### selected
+
+تاریخ‌های انتخاب‌شده اولیه را مشخص می‌کند. برای انتخاب بازه، یک آرایه شامل دو تاریخ را تعیین کنید.
+
+نوع: `DateObject[]`
+
+```tsx
+<Calendar selected={[new DateObject('2023-01-01'), new DateObject('2023-01-10')]} />
+```
+
+#### disablePastDays
+
+اگر `true` باشد، روزهای گذشته غیر فعال می‌شوند.
+
+نوع: `boolean`
+
+```tsx
+<Calendar disablePastDays={true} />
+```
+
+#### holidays
+
+آرایه‌ای از تاریخ‌های تعطیل که می‌خواهید در تقویم نشان داده شوند.
+
+نوع: `DateObject[]`
+
+```tsx
+<Calendar holidays={[new DateObject('2023-03-21'), new DateObject('2023-03-22')]} />
+```
+
+#### weekendOff
+
+اگر `true` باشد، تعطیلات آخر هفته غیر فعال می‌شوند.
+
+نوع: `boolean`
+
+```tsx
+<Calendar weekendOff={true} />
+```
+
+#### multipleChoice
+
+اگر `true` باشد، امکان انتخاب چندین تاریخ فراهم می‌شود.
+
+نوع: `boolean`
+
+```tsx
+<Calendar multipleChoice={true} />
+```
+
+#### activeDayStyle
+
+استایل روزهای فعال را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"w-full py-2 text-gray-800 hover:bg-green-dark hover:text-white flex items-center justify-center"`
+
+```tsx
+<Calendar activeDayStyle="bg-blue-500 text-white" />
+```
+
+#### inactiveDayStyle
+
+استایل روزهای غیر فعال را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"opacity-50"`
+
+```tsx
+<Calendar inactiveDayStyle="bg-gray-200" />
+```
+
+#### holidayStyle
+
+استایل روزهای تعطیل را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"text-red-500"`
+
+```tsx
+<Calendar holidayStyle="bg-red-200" />
+```
+
+#### selectedDayStyle
+
+استایل روزهای انتخاب‌شده را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"w-full py-2 bg-green-dark text-white flex items-center justify-center"`
+
+```tsx
+<Calendar selectedDayStyle="bg-yellow-500 text-black" />
+```
+
+#### yearClassName
+
+کلاس CSS برای نمایش سال را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer"`
+
+```tsx
+<Calendar yearClassName="custom-year-class" />
+```
+
+#### yearStyle
+
+استایل سال را مشخص می‌کند.
+
+نوع: `React.CSSProperties`
+
+```tsx
+<Calendar yearStyle={{ color: 'blue', fontWeight: 'bold' }} />
+```
+
+#### displayMonthAndYearName
+
+اگر `true` باشد، نام ماه و سال نمایش داده می‌شود.
+
+نوع: `boolean`
+
+```tsx
+<Calendar displayMonthAndYearName={true} />
+```
+
+#### dayItemSize
+
+اندازه آیتم‌های روز را مشخص می‌کند.
+
+نوع: `number`
+
+```tsx
+<Calendar dayItemSize={40} />
+```
+
+#### monthYearStyle
+
+استایل ماه و سال را مشخص می‌کند.
+
+نوع: `React.CSSProperties`
+
+```tsx
+<Calendar monthYearStyle={{ color: 'red', fontSize: '1.5em' }} />
+```
+
+#### weekDayStyle
+
+استایل روزهای هفته را مشخص می‌کند.
+
+نوع: `React.CSSProperties`
+
+```tsx
+<Calendar weekDayStyle={{ color: 'green', fontSize: '1em' }} />
+```
+
+#### setValue
+
+تابعی که تاریخ‌های انتخاب‌شده را به والد کامپوننت ارسال می‌کند.
+
+نوع: `(selectedDates: DateObject[]) => void`
+
+```tsx
+<Calendar setValue={(selectedDates) => console.log(selectedDates)} />
+```
+
+#### weekdaysClassName
+
+کلاس CSS برای نمایش نام روزهای هفته را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"-rotate-90 block text-start font-tanha font-medium"`
+
+```tsx
+<Calendar weekdaysClassName="custom-weekdays-class" />
+```
+
+#### weekdaysStyle
+
+استایل روزهای هفته را مشخص می‌کند.
+
+نوع: `React.CSSProperties`
+
+```tsx
+<Calendar weekdaysStyle={{ color: 'purple', fontSize: '1em' }} />
+```
+
+#### dayStyle
+
+استایل روزها را مشخص می‌کند.
+
+نوع: `React.CSSProperties`
+
+```tsx
+<Calendar dayStyle={{ color: 'black', fontSize: '1em' }} />
+```
+
+#### weekendOffStyle
+
+استایل روزهای آخر هفته را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"text-red-500"`
+
+```tsx
+<Calendar weekendOffStyle="bg-gray-300 text-black" />
+```
+
+#### monthYearClassName
+
+کلاس CSS برای نمایش ماه و سال را مشخص می‌کند.
+
+نوع: `string`
+
+پیش‌فرض: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur"`
+
+```tsx
+<Calendar monthYearClassName="custom-month-year-class" />
+```
+
+---
+
+### جمع‌بندی
+
+کامپوننت `Calendar` یک تقویم قابل تنظیم برای انتخاب تاریخ یا بازه زمانی است که با تقویم شمسی (فارسی) سازگار است. با استفاده از پراپس‌های مختلف، می‌توانید ظاهر و رفتار تقویم را به دلخواه خود تغییر دهید. این مستندات تمامی پراپس‌ها و نحوه استفاده از آنها را توضیح می‌دهد. امیدواریم که این راهنما به شما کمک کند تا به راحتی از این کامپوننت استفاده کنید.
