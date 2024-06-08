@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
@@ -209,6 +209,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                                     const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                                     const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
                                     const isSelected = dateObject.find(item => item.format() === day.format()) ? true : false;
+                                    day.month.length
                                     return (
                                         <div key={day.valueOf()} className=''>
                                             <Day

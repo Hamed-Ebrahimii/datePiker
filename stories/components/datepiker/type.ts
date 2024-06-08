@@ -46,4 +46,6 @@ export interface DatePikerProps {
     weekdaysClassName? : string; 
     isRange ? : boolean
     // disableWeekendSelection? : boo
+    dateObject ? : DateObject;
+    showNumberMonth ? : 1 | 2 | 3
 }
