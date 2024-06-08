@@ -14,7 +14,7 @@ export interface DatePikerProps {
     datePiker  : boolean ,
     weekStartDayIndex? : 0 |  1| 2| 3 |4| 5| 6 ,
     weekDayString? : string[] ,
-    selected : boolean ,
+    // selected : boolean ,
     multipleChoice?  : boolean,
     displayMonthAndYearName? : boolean,
     disablingThePreviousDay? : boolean ,
@@ -45,5 +45,5 @@ export interface DatePikerProps {
     weekdaysStyle? : CSSProperties;
     weekdaysClassName? : string; 
     isRange ? : boolean
-    
+    // disableWeekendSelection? : boo
 }

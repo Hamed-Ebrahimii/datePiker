@@ -6,15 +6,13 @@ import Day from "./day";
 import { DatePikerProps } from "../type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { useDidUpdate } from "@mantine/hooks";
-
-
 const Calendar: React.FC<DatePikerProps> = ({
     calendar,
     disableOutOfRangeDays = true,
     disablingThePreviousDay,
     weekStartDayIndex = 0,
     weekDayString,
-    selected,
+    datePiker ,
     disablePastDays,
     holidays = [],
     weekendOff,
@@ -33,6 +31,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium",
     weekdaysStyle,
     dayStyle,
+    
     weekendOffStyle = "text-red-500",
     monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
     isRange
@@ -89,8 +88,9 @@ const Calendar: React.FC<DatePikerProps> = ({
         return dates;
     };
     const handleSelectDate = (date: DateObject) => {
+        if(!datePiker) return
         if (isRange) {
-            // منطق انتخاب بازه زمانی
+           
             if (startDate && !endDate) {
                 if (date < startDate) {
                     setStartDate(date);
@@ -106,10 +106,10 @@ const Calendar: React.FC<DatePikerProps> = ({
                 setDateObject([date]);
             }
         } else {
-            // منطق انتخاب یک تاریخ
+            
             setStartDate(date);
             setEndDate(null);
-            setDateObject([date]);
+          multipleChoice ? setDateObject([...dateObject , date]) :  setDateObject([date]);
             setValue && setValue([date]);
         }
     };
@@ -146,8 +146,24 @@ const Calendar: React.FC<DatePikerProps> = ({
     }
     const isWeekend = (dayIndex: number) => {
         const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
-        return realDayIndex === 5 || realDayIndex === 6;
+    
+        if (weekStartDayIndex === 0) {
+            return realDayIndex === 5 || realDayIndex === 6;
+        } else if (weekStartDayIndex === 1) {
+            return realDayIndex === 6 || realDayIndex === 0;
+        } else if (weekStartDayIndex === 2) {
+            return realDayIndex === 0 || realDayIndex === 1;
+        } else if (weekStartDayIndex === 3) {
+            return realDayIndex === 1 || realDayIndex === 2;
+        } else if (weekStartDayIndex === 4) {
+            return realDayIndex === 2 || realDayIndex === 3;
+        } else if (weekStartDayIndex === 5) {
+            return realDayIndex === 3 || realDayIndex === 4;
+        } else if (weekStartDayIndex === 6) {
+            return realDayIndex === 4 || realDayIndex === 5;
+        }
     };
+    
     useDidUpdate(() => {
         setCurrentMonth(new DateObject({
             calendar: calendar === 'persian' ? persian : undefined,

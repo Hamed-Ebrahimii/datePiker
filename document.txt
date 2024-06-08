@@ -1,22 +1,22 @@
-### مستندات کامپوننت Calendar
+### Calendar Component Documentation
 
-این مستندات نحوه استفاده از کامپوننت تقویم `Calendar` را توضیح می‌دهد. این کامپوننت قابلیت انتخاب یک تاریخ یا یک بازه زمانی را دارا می‌باشد و می‌تواند با تقویم شمسی (فارسی) کار کند.
+This documentation explains how to use the `Calendar` component. This component can select a single date or a date range and can work with the Persian (Jalali) calendar.
 
 ---
 
-### استفاده از کامپوننت Calendar
+### Using the Calendar Component
 
-#### وارد کردن کامپوننت
+#### Importing the Component
 
-ابتدا کامپوننت `Calendar` را در پروژه خود وارد کنید:
+First, import the `Calendar` component into your project:
 
 ```tsx
 import Calendar from './path/to/Calendar';
 ```
 
-#### استفاده از کامپوننت
+#### Using the Component
 
-برای استفاده از این کامپوننت، می‌توانید آن را به شکل زیر در JSX خود قرار دهید:
+To use this component, include it in your JSX as follows:
 
 ```tsx
 <Calendar
@@ -28,14 +28,14 @@ import Calendar from './path/to/Calendar';
 
 ---
 
-### پراپس‌های Calendar
+### Calendar Props
 
-این کامپوننت از چندین پراپس پشتیبانی می‌کند که به شما امکان می‌دهد رفتار و ظاهر آن را تنظیم کنید. در ادامه توضیح هر یک از این پراپس‌ها آمده است:
+This component supports several props that allow you to configure its behavior and appearance. Below is a description of each prop:
 
 #### calendar
 
-نوع تقویم مورد استفاده در کامپوننت را مشخص می‌کند. مقادیر ممکن:
-- `persian` : تقویم شمسی (فارسی)
+Specifies the type of calendar used in the component. Possible values:
+- `persian`: Jalali (Persian) calendar
 
 ```tsx
 <Calendar calendar="persian" />
@@ -43,9 +43,9 @@ import Calendar from './path/to/Calendar';
 
 #### enableRangeSelection
 
-اگر `true` باشد، امکان انتخاب بازه زمانی فراهم می‌شود. اگر `false` باشد، تنها یک تاریخ قابل انتخاب است.
+If `true`, enables date range selection. If `false`, only a single date can be selected.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar enableRangeSelection={true} />
@@ -53,11 +53,11 @@ import Calendar from './path/to/Calendar';
 
 #### disableOutOfRangeDays
 
-اگر `true` باشد، روزهای خارج از محدوده ماه جاری غیر فعال می‌شوند.
+If `true`, disables days outside the current month.
 
-نوع: `boolean`
+Type: `boolean`
 
-پیش‌فرض: `true`
+Default: `true`
 
 ```tsx
 <Calendar disableOutOfRangeDays={false} />
@@ -65,9 +65,9 @@ import Calendar from './path/to/Calendar';
 
 #### disablingThePreviousDay
 
-اگر `true` باشد، روزهای قبل از تاریخ فعلی غیر فعال می‌شوند.
+If `true`, disables days before the current date.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar disablingThePreviousDay={true} />
@@ -75,14 +75,14 @@ import Calendar from './path/to/Calendar';
 
 #### weekStartDayIndex
 
-شاخص روز شروع هفته را مشخص می‌کند. مقادیر ممکن:
-- `0`: یکشنبه
-- `1`: دوشنبه
+Specifies the index of the day the week starts on. Possible values:
+- `0`: Sunday
+- `1`: Monday
 - ...
 
-نوع: `number`
+Type: `number`
 
-پیش‌فرض: `0`
+Default: `0`
 
 ```tsx
 <Calendar weekStartDayIndex={6} />
@@ -90,9 +90,9 @@ import Calendar from './path/to/Calendar';
 
 #### weekDayString
 
-آرایه‌ای از نام‌های روزهای هفته. می‌توانید نام‌ها را به فارسی یا هر زبانی که می‌خواهید تنظیم کنید.
+An array of weekday names. You can set the names in Persian or any other language.
 
-نوع: `string[]`
+Type: `string[]`
 
 ```tsx
 <Calendar weekDayString={["ش", "ی", "د", "س", "چ", "پ", "ج"]} />
@@ -100,9 +100,9 @@ import Calendar from './path/to/Calendar';
 
 #### selected
 
-تاریخ‌های انتخاب‌شده اولیه را مشخص می‌کند. برای انتخاب بازه، یک آرایه شامل دو تاریخ را تعیین کنید.
+Specifies the initially selected dates. For range selection, provide an array with two dates.
 
-نوع: `DateObject[]`
+Type: `DateObject[]`
 
 ```tsx
 <Calendar selected={[new DateObject('2023-01-01'), new DateObject('2023-01-10')]} />
@@ -110,9 +110,9 @@ import Calendar from './path/to/Calendar';
 
 #### disablePastDays
 
-اگر `true` باشد، روزهای گذشته غیر فعال می‌شوند.
+If `true`, disables past days.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar disablePastDays={true} />
@@ -120,9 +120,9 @@ import Calendar from './path/to/Calendar';
 
 #### holidays
 
-آرایه‌ای از تاریخ‌های تعطیل که می‌خواهید در تقویم نشان داده شوند.
+An array of holiday dates you want to display on the calendar.
 
-نوع: `DateObject[]`
+Type: `DateObject[]`
 
 ```tsx
 <Calendar holidays={[new DateObject('2023-03-21'), new DateObject('2023-03-22')]} />
@@ -130,9 +130,9 @@ import Calendar from './path/to/Calendar';
 
 #### weekendOff
 
-اگر `true` باشد، تعطیلات آخر هفته غیر فعال می‌شوند.
+If `true`, disables weekends.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar weekendOff={true} />
@@ -140,9 +140,9 @@ import Calendar from './path/to/Calendar';
 
 #### multipleChoice
 
-اگر `true` باشد، امکان انتخاب چندین تاریخ فراهم می‌شود.
+If `true`, enables multiple date selection.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar multipleChoice={true} />
@@ -150,11 +150,11 @@ import Calendar from './path/to/Calendar';
 
 #### activeDayStyle
 
-استایل روزهای فعال را مشخص می‌کند.
+Specifies the style for active days.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"w-full py-2 text-gray-800 hover:bg-green-dark hover:text-white flex items-center justify-center"`
+Default: `"w-full py-2 text-gray-800 hover:bg-green-dark hover:text-white flex items-center justify-center"`
 
 ```tsx
 <Calendar activeDayStyle="bg-blue-500 text-white" />
@@ -162,11 +162,11 @@ import Calendar from './path/to/Calendar';
 
 #### inactiveDayStyle
 
-استایل روزهای غیر فعال را مشخص می‌کند.
+Specifies the style for inactive days.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"opacity-50"`
+Default: `"opacity-50"`
 
 ```tsx
 <Calendar inactiveDayStyle="bg-gray-200" />
@@ -174,11 +174,11 @@ import Calendar from './path/to/Calendar';
 
 #### holidayStyle
 
-استایل روزهای تعطیل را مشخص می‌کند.
+Specifies the style for holiday days.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"text-red-500"`
+Default: `"text-red-500"`
 
 ```tsx
 <Calendar holidayStyle="bg-red-200" />
@@ -186,11 +186,11 @@ import Calendar from './path/to/Calendar';
 
 #### selectedDayStyle
 
-استایل روزهای انتخاب‌شده را مشخص می‌کند.
+Specifies the style for selected days.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"w-full py-2 bg-green-dark text-white flex items-center justify-center"`
+Default: `"w-full py-2 bg-green-dark text-white flex items-center justify-center"`
 
 ```tsx
 <Calendar selectedDayStyle="bg-yellow-500 text-black" />
@@ -198,11 +198,11 @@ import Calendar from './path/to/Calendar';
 
 #### yearClassName
 
-کلاس CSS برای نمایش سال را مشخص می‌کند.
+Specifies the CSS class for displaying the year.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer"`
+Default: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer"`
 
 ```tsx
 <Calendar yearClassName="custom-year-class" />
@@ -210,9 +210,9 @@ import Calendar from './path/to/Calendar';
 
 #### yearStyle
 
-استایل سال را مشخص می‌کند.
+Specifies the style for the year.
 
-نوع: `React.CSSProperties`
+Type: `React.CSSProperties`
 
 ```tsx
 <Calendar yearStyle={{ color: 'blue', fontWeight: 'bold' }} />
@@ -220,9 +220,9 @@ import Calendar from './path/to/Calendar';
 
 #### displayMonthAndYearName
 
-اگر `true` باشد، نام ماه و سال نمایش داده می‌شود.
+If `true`, displays the month and year name.
 
-نوع: `boolean`
+Type: `boolean`
 
 ```tsx
 <Calendar displayMonthAndYearName={true} />
@@ -230,9 +230,9 @@ import Calendar from './path/to/Calendar';
 
 #### dayItemSize
 
-اندازه آیتم‌های روز را مشخص می‌کند.
+Specifies the size of day items.
 
-نوع: `number`
+Type: `number`
 
 ```tsx
 <Calendar dayItemSize={40} />
@@ -240,9 +240,9 @@ import Calendar from './path/to/Calendar';
 
 #### monthYearStyle
 
-استایل ماه و سال را مشخص می‌کند.
+Specifies the style for the month and year.
 
-نوع: `React.CSSProperties`
+Type: `React.CSSProperties`
 
 ```tsx
 <Calendar monthYearStyle={{ color: 'red', fontSize: '1.5em' }} />
@@ -250,9 +250,9 @@ import Calendar from './path/to/Calendar';
 
 #### weekDayStyle
 
-استایل روزهای هفته را مشخص می‌کند.
+Specifies the style for weekdays.
 
-نوع: `React.CSSProperties`
+Type: `React.CSSProperties`
 
 ```tsx
 <Calendar weekDayStyle={{ color: 'green', fontSize: '1em' }} />
@@ -260,9 +260,9 @@ import Calendar from './path/to/Calendar';
 
 #### setValue
 
-تابعی که تاریخ‌های انتخاب‌شده را به والد کامپوننت ارسال می‌کند.
+A function that returns the selected dates to the parent component.
 
-نوع: `(selectedDates: DateObject[]) => void`
+Type: `(selectedDates: DateObject[]) => void`
 
 ```tsx
 <Calendar setValue={(selectedDates) => console.log(selectedDates)} />
@@ -270,11 +270,11 @@ import Calendar from './path/to/Calendar';
 
 #### weekdaysClassName
 
-کلاس CSS برای نمایش نام روزهای هفته را مشخص می‌کند.
+Specifies the CSS class for displaying the weekday names.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"-rotate-90 block text-start font-tanha font-medium"`
+Default: `"-rotate-90 block text-start font-tanha font-medium"`
 
 ```tsx
 <Calendar weekdaysClassName="custom-weekdays-class" />
@@ -282,9 +282,9 @@ import Calendar from './path/to/Calendar';
 
 #### weekdaysStyle
 
-استایل روزهای هفته را مشخص می‌کند.
+Specifies the style for weekdays.
 
-نوع: `React.CSSProperties`
+Type: `React.CSSProperties`
 
 ```tsx
 <Calendar weekdaysStyle={{ color: 'purple', fontSize: '1em' }} />
@@ -292,9 +292,9 @@ import Calendar from './path/to/Calendar';
 
 #### dayStyle
 
-استایل روزها را مشخص می‌کند.
+Specifies the style for days.
 
-نوع: `React.CSSProperties`
+Type: `React.CSSProperties`
 
 ```tsx
 <Calendar dayStyle={{ color: 'black', fontSize: '1em' }} />
@@ -302,11 +302,11 @@ import Calendar from './path/to/Calendar';
 
 #### weekendOffStyle
 
-استایل روزهای آخر هفته را مشخص می‌کند.
+Specifies the style for weekend off days.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"text-red-500"`
+Default: `"text-red-500"`
 
 ```tsx
 <Calendar weekendOffStyle="bg-gray-300 text-black" />
@@ -314,11 +314,11 @@ import Calendar from './path/to/Calendar';
 
 #### monthYearClassName
 
-کلاس CSS برای نمایش ماه و سال را مشخص می‌کند.
+Specifies the CSS class for displaying the month and year.
 
-نوع: `string`
+Type: `string`
 
-پیش‌فرض: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur"`
+Default: `"text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur"`
 
 ```tsx
 <Calendar monthYearClassName="custom-month-year-class" />
@@ -326,6 +326,6 @@ import Calendar from './path/to/Calendar';
 
 ---
 
-### جمع‌بندی
+### Summary
 
-کامپوننت `Calendar` یک تقویم قابل تنظیم برای انتخاب تاریخ یا بازه زمانی است که با تقویم شمسی (فارسی) سازگار است. با استفاده از پراپس‌های مختلف، می‌توانید ظاهر و رفتار تقویم را به دلخواه خود تغییر دهید. این مستندات تمامی پراپس‌ها و نحوه استفاده از آنها را توضیح می‌دهد. امیدواریم که این راهنما به شما کمک کند تا به راحتی از این کامپوننت استفاده کنید.
+The `Calendar` component is a customizable calendar for selecting dates or date ranges that is compatible with the Persian (Jalali) calendar. By using various props, you can tailor the appearance and behavior of the calendar to your liking. This documentation explains all the props and how to use them. We hope this guide helps you use this component easily and effectively.
