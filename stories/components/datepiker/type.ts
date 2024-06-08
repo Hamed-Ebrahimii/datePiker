@@ -22,6 +22,7 @@ export interface DatePikerProps {
     maxDate? : string,
     holidays? : string[]
     weekendOff? : boolean,
+    weekendOffStyle? : string,
     disableOutOfRangeDays? : boolean
     disablePastDays : boolean
     activeDayStyle?: string;
@@ -40,8 +41,9 @@ export interface DatePikerProps {
     inputStyle? : CSSProperties
     yearStyle ? : CSSProperties;
     yearClassName? : string;
-    setValue : (value: DateObject) => void;
+    setValue : (value: DateObject[]) => void;
     weekdaysStyle? : CSSProperties;
     weekdaysClassName? : string; 
+    isRange ? : boolean
     
 }

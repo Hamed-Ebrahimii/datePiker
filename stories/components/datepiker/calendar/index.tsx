@@ -21,7 +21,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     multipleChoice,
     activeDayStyle = "w-full py-2 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
     inactiveDayStyle = "opacity-50",
-    holidayStyle,
+    holidayStyle = "text-red-500",
     selectedDayStyle = "w-full py-2   bg-green-dark text-white flex items-center justify-center",
     yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer",
     yearStyle,
@@ -33,10 +33,14 @@ const Calendar: React.FC<DatePikerProps> = ({
     weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium",
     weekdaysStyle,
     dayStyle,
+    weekendOffStyle = "text-red-500",
     monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
+    isRange
 }) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
+    const [startDate, setStartDate] = useState<DateObject | null>(null);
+    const [endDate, setEndDate] = useState<DateObject | null>(null);
     const [currentMonth, setCurrentMonth] = useState(new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
         locale: calendar === 'persian' ? persian_fa : undefined
@@ -74,8 +78,40 @@ const Calendar: React.FC<DatePikerProps> = ({
     const prevYear = () => {
         handleYearChange(currentMonth.year - 1);
     };
-    const handleSelectDate = (data: DateObject) => {
-        multipleChoice ? setDateObject([...dateObject, data]) : setDateObject([data]);
+
+    const getDatesInRange = (start: DateObject, end: DateObject) => {
+        let dates = [];
+        let currentDate = new DateObject(start);
+        while (currentDate <= end) {
+            dates.push(new DateObject(currentDate));
+            currentDate.add(1, "day");
+        }
+        return dates;
+    };
+    const handleSelectDate = (date: DateObject) => {
+        if (isRange) {
+            // منطق انتخاب بازه زمانی
+            if (startDate && !endDate) {
+                if (date < startDate) {
+                    setStartDate(date);
+                } else {
+                    setEndDate(date);
+                    const datesInRange = getDatesInRange(startDate, date);
+                    setDateObject(datesInRange);
+                    setValue && setValue([startDate, date]);
+                }
+            } else {
+                setStartDate(date);
+                setEndDate(null);
+                setDateObject([date]);
+            }
+        } else {
+            // منطق انتخاب یک تاریخ
+            setStartDate(date);
+            setEndDate(null);
+            setDateObject([date]);
+            setValue && setValue([date]);
+        }
     };
     const weekDays = currentMonth.weekDays;
     const orderedWeekDays = [...weekDays.slice(weekStartDayIndex || 0), ...weekDays.slice(0, weekStartDayIndex || 0)];
@@ -160,6 +196,8 @@ const Calendar: React.FC<DatePikerProps> = ({
                                     return (
                                         <div key={day.valueOf()} className=''>
                                             <Day
+                                            isRange={isRange}
+                                            weekendOffStyle={weekendOffStyle}
                                                 isSelected={isSelected}
                                                 isPastDay={isPastDay}
                                                 isOutOfRange={isOutOfRange}
@@ -174,6 +212,8 @@ const Calendar: React.FC<DatePikerProps> = ({
                                                 holidayStyle={holidayStyle}
                                                 selectedDayStyle={selectedDayStyle}
                                                 dayItemSize={dayItemSize}
+                                                range_end={endDate?.daysLeft === day.daysLeft}
+                                                range_start={startDate?.daysLeft === day.daysLeft}
                                             />
                                         </div>
                                     );
