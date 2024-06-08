@@ -1,4 +1,4 @@
-import Image from "next/image";
+"use client"
 import DatePiker from "@/stories/components/datepiker";
 
 export default function Home() {
