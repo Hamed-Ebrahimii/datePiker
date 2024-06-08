@@ -198,7 +198,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                         ))}
                     </div>
                     <div className='mt-5'>
-                        {Array.from({ length: 5 }).map((_, weekIndex) => (
+                        {Array.from({ length: currentMonth.weekDay.index < 5 ? 5 : 6 }).map((_, weekIndex) => (
                             <div key={weekIndex} className={'grid grid-cols-7  items-center justify-between'}>
                                 {Array.from({ length: 7 }).map((_, dayIndex) => {
                                     const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
