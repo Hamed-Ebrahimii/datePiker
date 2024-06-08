@@ -1,28 +1,28 @@
 @font-face {
     font-family: 'vazir';
-    src: url("public/font/Vazirmatn-Black.woff2");
+    src: url("/font/Vazirmatn-Black.woff2");
 }
 @font-face {
     font-family: 'vazir';
-    src: url("public/font/Vazirmatn-Bold.woff2");
+    src: url("/font/Vazirmatn-Bold.woff2");
     font-weight: bold;
 }
 @font-face {
     font-family: 'vazir';
-    src: url("public/font/Vazirmatn-Medium.woff2");
+    src: url("/font/Vazirmatn-Medium.woff2");
     font-weight: auto;
 }
 @font-face {
     font-family: 'vazir';
-    src: url("public/font/Vazirmatn-ExtraBold.woff2");
+    src: url("/font/Vazirmatn-ExtraBold.woff2");
 }
 @font-face {
     font-family: 'vazir';
-    src: url("public/font/Vazirmatn-Light.woff2");
+    src: url("/font/Vazirmatn-Light.woff2");
 }
 @font-face {
     font-family: 'titr';
-    src: url("public/font/B Titr Bold_0.ttf");
+    src: url("/font/B Titr Bold_0.ttf");
 }
 @tailwind base;
 @tailwind components;

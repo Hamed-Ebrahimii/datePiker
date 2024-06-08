@@ -30,7 +30,7 @@ const Day = ({date , disable , holiday , weekendOff , weekendOffStyle , isOutOfR
     const className = `${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-lg'} ${range_end && 'rounded-l-lg'} ${weekendOff && weekendOffStyle} ${!isRange && 'rounded-lg'}`
     return (
         <button onClick={onClick} disabled={isDisabled} style={dayStyle} className={className}>
-                <p className="font-medium font-titr">
+                <p className="font-medium font-titr ">
                 {
                     date.day
                 }
