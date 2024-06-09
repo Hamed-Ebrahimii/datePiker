@@ -8,35 +8,35 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { useDidUpdate } from "@mantine/hooks";
 
 const Calendar: React.FC<DatePikerProps> = ({
-                                                calendar,
-                                                disableOutOfRangeDays = true,
-                                                disablingThePreviousDay,
-                                                weekStartDayIndex = 0,
-                                                weekDayString,
-                                                datePiker,
-                                                disablePastDays,
-                                                holidays = [],
-                                                weekendOff,
-                                                multipleChoice,
-                                                activeDayStyle = "w-full py-2 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
-                                                inactiveDayStyle = "opacity-50",
-                                                holidayStyle = "text-red-500",
-                                                selectedDayStyle = "w-full py-2   bg-green-dark text-white flex items-center justify-center",
-                                                yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer",
-                                                yearStyle,
-                                                displayMonthAndYearName,
-                                                dayItemSize,
-                                                monthYearStyle,
-                                                weekDayStyle,
-                                                setValue,
-                                                weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium",
-                                                weekdaysStyle,
-                                                dayStyle,
-                                                weekendOffStyle = "text-red-500",
-                                                monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
-                                                isRange,
-      dayClassName
-                                            }) => {
+    calendar,
+    disableOutOfRangeDays = true,
+    disablingThePreviousDay,
+    weekStartDayIndex = 0,
+    weekDayString,
+    datePiker,
+    disablePastDays,
+    holidays = [],
+    weekendOff,
+    multipleChoice,
+    activeDayStyle = "w-full py-2 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center",
+    inactiveDayStyle = "opacity-50",
+    holidayStyle = "text-red-500",
+    selectedDayStyle = "w-full py-2  bg-green-dark text-white flex items-center justify-center",
+    yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer",
+    yearStyle,
+    displayMonthAndYearName,
+    dayItemSize,
+    monthYearStyle,
+    weekDayStyle,
+    setValue,
+    weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium",
+    weekdaysStyle,
+    dayStyle,
+    weekendOffStyle = "text-red-500",
+    monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
+    isRange,
+    dayClassName
+}) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
     const [startDate, setStartDate] = useState<DateObject | null>(null);
@@ -96,7 +96,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     };
 
     const handleSelectDate = (date: DateObject) => {
-        if(!datePiker) return
+        if (!datePiker) return
         if (isRange) {
             if (startDate && !endDate) {
                 if (date < startDate) {
@@ -113,7 +113,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                 setDateObject([date]);
             }
         } else {
-            setStartDate(date);
+            setStartDate(null);
             setEndDate(null);
             multipleChoice ? setDateObject([...dateObject, date]) : setDateObject([date]);
             setValue && setValue([date]);
@@ -200,7 +200,9 @@ const Calendar: React.FC<DatePikerProps> = ({
     };
 
     const calendarDays = generateCalendarDays();
-
+    const isDateInRange = (date : DateObject) => {
+        return dateObject.some(selectedDate => selectedDate.valueOf === date.valueOf);
+    };
     return (
         <div className={`w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
             {displayMonthAndYearName && (

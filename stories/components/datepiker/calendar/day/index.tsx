@@ -22,12 +22,13 @@ export interface DayProps {
     dayStyle? : CSSProperties
     weekendOffStyle : string
     isRange? : boolean
+    
 }
 
 const Day = ({date , disable , holiday , weekendOff , weekendOffStyle , isOutOfRange , isPastDay , isSelected , onClick  , activeDayStyle , selectedDayStyle , inactiveDayStyle , holidayStyle , dayItemSize , rangeStartDayBorder , rangeEndDayBorder , range_end , range_start , dayStyle  , isRange} : DayProps) =>{
     const isDisabled = disable   || isOutOfRange || isPastDay || holiday
     console.log(disable , holiday ,isOutOfRange , isPastDay )
-    const className = `${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-lg'} ${range_end && 'rounded-l-lg'} ${weekendOff && weekendOffStyle} ${!isRange && 'rounded-lg'}`
+    const className = `${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-full'} ${range_end && 'rounded-l-full'} ${weekendOff && weekendOffStyle} ${!isRange && 'rounded-sm'}`
     return (
         <button onClick={onClick} disabled={isDisabled} style={dayStyle} className={className}>
                 <p className="font-medium font-titr ">

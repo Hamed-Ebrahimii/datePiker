@@ -14,7 +14,7 @@ export interface DatePikerProps {
     datePiker  : boolean ,
     weekStartDayIndex? : 0 |  1| 2| 3 |4| 5| 6 ,
     weekDayString? : string[] ,
-    // selected : boolean ,
+    
     multipleChoice?  : boolean,
     displayMonthAndYearName? : boolean,
     disablingThePreviousDay? : boolean ,
