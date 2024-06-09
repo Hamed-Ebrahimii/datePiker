@@ -190,8 +190,8 @@ const Calendar: React.FC<DatePikerProps> = ({
             ? firstDayOfMonth.weekDay.index - weekStartDayIndex
             : 7 + (firstDayOfMonth.weekDay.index - weekStartDayIndex);
         const firstVisibleDay = firstDayOfMonth.subtract(startDay, "day");
-
-        for (let week = 0; week < 6; week++) {
+        const stop = currentMonth.weekDay.index < 5 ? 5 :6;
+        for (let week =  0  ; week <  stop; week++) {
             for (let day = 0; day < 7; day++) {
                 days.push(new DateObject(firstVisibleDay).add(week * 7 + day, "day"));
             }
@@ -200,7 +200,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     };
 
     const calendarDays = generateCalendarDays();
-    const isDateInRange = (date : DateObject) => {
+    const isDateInRange = (date: DateObject) => {
         return dateObject.some(selectedDate => selectedDate.valueOf === date.valueOf);
     };
     return (
@@ -227,14 +227,21 @@ const Calendar: React.FC<DatePikerProps> = ({
                             <div className={weekdaysClassName} key={item.index}>{item.name}</div>
                         ))}
                     </div>
-                    <div className='mt-5 grid grid-cols-7'>
-                        {calendarDays.map((day, index) => {
+                    <div className='mt-5 grid grid-cols-7 gap-y-2'>
+                        {calendarDays?.map((day, index) => {
+                            const holidayList = holidays?.map((item) => new DateObject({
+                                date: item, calendar: calendar === 'persian' ? persian : undefined,
+                                locale: calendar === 'persian' ? persian_fa : undefined
+                            }))
+
+
                             const isWeekendOff = weekendOff && isWeekend(index);
-                            const isDisabled = disablingThePreviousDay ? day.valueOf() < today.valueOf() : false;
-                            const isHoliday = holidays.includes(day.format("YYYY-MM-DD"));
+                            const isDisabled = disablingThePreviousDay && day.add(1 , 'days').valueOf() < today.valueOf() ;
+                            const isHoliday = holidayList?.find(item => day.format() === item.format());
                             const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
-                            const isPastDay = disablePastDays && day.valueOf() < today.valueOf();
-                            const isSelected = dateObject.find(item => item.format() === day.format()) ? true : false;
+                            const isPastDay = disablePastDays && day.valueOf() < today.valueOf();  ;
+                            const isSelected = dateObject?.find(item => item.format() === day.format()) ? true : false;
+                            console.log(isHoliday);
 
                             return (
                                 <div key={day.valueOf()} className=''>
@@ -245,9 +252,10 @@ const Calendar: React.FC<DatePikerProps> = ({
                                         isPastDay={isPastDay}
                                         isOutOfRange={isOutOfRange}
                                         key={index}
-                                        disable={isDisabled}
+                                        disable={isDisabled || false}
                                         date={day}
-                                        holiday={isHoliday}
+                                        dayClassName={dayClassName}
+                                        holiday={Boolean(isHoliday)}
                                         weekendOff={isWeekendOff}
                                         onClick={() => handleSelectDate(day)}
                                         activeDayStyle={activeDayStyle}

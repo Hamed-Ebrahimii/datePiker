@@ -19,6 +19,10 @@ export const DatePikerPersian : Story = {
         monthYearStyle : {
             color : "red"
         },
+        setValue :  () =>{
+            alert('hi')
+        },
+        holidays : ['۱۴۰۳/۰۳/۲۰' , '1403/03/21']
 
     }
 } 

@@ -22,13 +22,13 @@ export interface DayProps {
     dayStyle? : CSSProperties
     weekendOffStyle : string
     isRange? : boolean
-    
+    dayClassName? : string
 }
 
-const Day = ({date , disable , holiday , weekendOff , weekendOffStyle , isOutOfRange , isPastDay , isSelected , onClick  , activeDayStyle , selectedDayStyle , inactiveDayStyle , holidayStyle , dayItemSize , rangeStartDayBorder , rangeEndDayBorder , range_end , range_start , dayStyle  , isRange} : DayProps) =>{
-    const isDisabled = disable   || isOutOfRange || isPastDay || holiday
+const Day = ({date , disable , holiday , weekendOff , weekendOffStyle , isOutOfRange , isPastDay , isSelected , onClick  , activeDayStyle , selectedDayStyle , inactiveDayStyle , holidayStyle , dayItemSize , rangeStartDayBorder , rangeEndDayBorder , range_end , range_start , dayStyle  , isRange , dayClassName} : DayProps) =>{
+    const isDisabled = disable   || isOutOfRange || isPastDay 
     console.log(disable , holiday ,isOutOfRange , isPastDay )
-    const className = `${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-full'} ${range_end && 'rounded-l-full'} ${weekendOff && weekendOffStyle} ${!isRange && 'rounded-sm'}`
+    const className = `${dayClassName} ${isSelected && selectedDayStyle} ${activeDayStyle}   disabled:opacity-50 ${holiday && holidayStyle} ${range_start && 'rounded-r-full'} ${range_end && 'rounded-l-full'} ${weekendOff && weekendOffStyle} ${!isRange && 'rounded-sm'}`
     return (
         <button onClick={onClick} disabled={isDisabled} style={dayStyle} className={className}>
                 <p className="font-medium font-titr ">
