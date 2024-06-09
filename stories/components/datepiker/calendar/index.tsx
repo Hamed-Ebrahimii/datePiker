@@ -123,7 +123,6 @@ const Calendar: React.FC<DatePikerProps> = ({
 
     const weekDays = currentMonth.weekDays;
     const orderedWeekDays = [...weekDays.slice(weekStartDayIndex), ...weekDays.slice(0, weekStartDayIndex)];
-
     const renderYears = () => {
         const startYear = currentMonth.year - Math.floor(currentMonth.year % yearsPerPage);
         const years = Array.from({ length: yearsPerPage }, (_, i) => startYear + i + (yearPage * yearsPerPage));
@@ -137,7 +136,6 @@ const Calendar: React.FC<DatePikerProps> = ({
             </div>
         );
     };
-
     const handleNext = () => {
         if (!showMonth && !showYear) {
             nextMonth();
@@ -146,7 +144,6 @@ const Calendar: React.FC<DatePikerProps> = ({
             setYearPage(prev => prev + 1);
         }
     };
-
     const handlePrev = () => {
         if (!showMonth && !showYear) {
             prevMonth();
@@ -155,7 +152,6 @@ const Calendar: React.FC<DatePikerProps> = ({
             setYearPage(prev => prev - 1);
         }
     };
-
     const isWeekend = (dayIndex: number) => {
         const realDayIndex = (dayIndex + weekStartDayIndex) % 7;
         if (weekStartDayIndex === 0) {
@@ -174,16 +170,12 @@ const Calendar: React.FC<DatePikerProps> = ({
             return realDayIndex === 4 || realDayIndex === 5;
         }
     };
-
     useDidUpdate(() => {
         setCurrentMonth(new DateObject({
             calendar: calendar === 'persian' ? persian : undefined,
             locale: calendar === 'persian' ? persian_fa : undefined
         }).toFirstOfMonth());
     }, [calendar]);
-
-
-
     const generateCalendarDays = () => {
         const days = [];
         const firstDayOfMonth = new DateObject(currentMonth).toFirstOfMonth();
@@ -203,15 +195,11 @@ const Calendar: React.FC<DatePikerProps> = ({
         for (let week = 0; week < stop; week++) {
             for (let day = 0; day < 7; day++) {
                 const dayObject = new DateObject(firstVisibleDay).add(week * 7 + day, "day")
-
-
                 days.push(dayObject);
-
             }
         }
         return days;
     };
-
     const calendarDays = generateCalendarDays();
     return (
         <div className={`w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
