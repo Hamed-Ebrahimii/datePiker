@@ -19,8 +19,6 @@ export const DatePikerPersian : Story = {
         monthYearStyle : {
             color : "red"
         },
-        dayStyle : {
-            borderRadius : '5px'
-        }
+
     }
 } 

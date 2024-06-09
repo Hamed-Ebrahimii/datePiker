@@ -34,7 +34,8 @@ const Calendar: React.FC<DatePikerProps> = ({
                                                 dayStyle,
                                                 weekendOffStyle = "text-red-500",
                                                 monthYearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 cur",
-                                                isRange
+                                                isRange,
+      dayClassName
                                             }) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
@@ -252,6 +253,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                                         holidayStyle={holidayStyle}
                                         selectedDayStyle={selectedDayStyle}
                                         dayItemSize={dayItemSize}
+                                        dayStyle={dayStyle}
                                         range_end={endDate?.daysLeft === day.daysLeft}
                                         range_start={startDate?.daysLeft === day.daysLeft}
                                     />
