@@ -5,7 +5,7 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import Day from "./day";
 import { DatePikerProps } from "../type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import { range, useDidUpdate } from "@mantine/hooks";
+import { useDidUpdate } from "@mantine/hooks";
 
 const Calendar: React.FC<DatePikerProps> = ({
     calendar,
