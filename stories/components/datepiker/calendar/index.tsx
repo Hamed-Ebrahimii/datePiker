@@ -19,9 +19,9 @@ const Calendar: React.FC<DatePikerProps> = ({
     weekendOff,
     multipleChoice,
     activeDayStyle,
-    inactiveDayStyle ,
-    holidayStyle ,
-    selectedDayStyle ,
+    inactiveDayStyle,
+    holidayStyle,
+    selectedDayStyle,
     yearClassName = "text-lg font-medium text-center border border-green-dark rounded-lg py-4 text-center cursor-pointer",
     yearStyle,
     displayMonthAndYearName,
@@ -32,11 +32,13 @@ const Calendar: React.FC<DatePikerProps> = ({
     weekdaysClassName = "-rotate-90 block text-start font-tanha font-medium",
     weekdaysStyle,
     dayStyle,
-    weekendOffStyle ,
-    monthYearClassName ,
+    weekendOffStyle,
+    monthYearClassName,
     isRange,
     dayClassName,
-    rangeInMonth
+    rangeInMonth,
+    disabledMonth,
+    disabledYear
 }) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
@@ -215,15 +217,20 @@ const Calendar: React.FC<DatePikerProps> = ({
         <div className={`w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
             {displayMonthAndYearName && (
                 <div className={`w-full py-2 flex items-center justify-center gap-3 text-xl font-medium relative ${monthYearStyle}`}>
-                    <p onClick={() => { setShowMonth(true); setShowYear(false); }} className={'cursor-pointer'}>
+                    <button disabled={disabledMonth} onClick={() => { setShowMonth(true); setShowYear(false); }} className={'cursor-pointer '}>
                         {currentMonth.month.name}
-                    </p>
-                    <p onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer font-titr'}>
+                    </button>
+                    <button disabled={disabledYear} onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer font-titr'}>
                         {currentMonth.year}
-                    </p>
-                    <ChevronLeftIcon onClick={handleNext} className="size-10 text-gray-500  absolute left-0 cursor-pointer" />
+                    </button>
+                    <button disabled={disabledMonth || disabledYear} className="disabled:hidden">
 
-                    <ChevronRightIcon onClick={handlePrev} className="size-10 text-gray-500 absolute right-0 cursor-pointer" />
+                        <ChevronLeftIcon onClick={handleNext} className="size-10 text-gray-500  absolute left-0  disabled:hidden" />
+                    </button>
+                    <button className="disabled:hidden" disabled={disabledMonth || disabledYear}>
+
+                        <ChevronRightIcon onClick={handlePrev} className="size-10 text-gray-500 absolute right-0  disabled:hidden" />
+                    </button>
                 </div>
             )}
             {!showMonth && !showYear && (
@@ -271,7 +278,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                                         dayStyle={dayStyle}
                                         range_end={endDate?.daysLeft === day.daysLeft}
                                         range_start={startDate?.daysLeft === day.daysLeft}
-                                        
+
                                     />
                                 </div>
                             );

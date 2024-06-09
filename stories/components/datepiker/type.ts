@@ -51,4 +51,6 @@ export interface DatePikerProps {
         startDay : number,
         endDay : number
     }
+    disabledMonth ? : boolean
+    disabledYear ? : boolean
 }
