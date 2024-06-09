@@ -223,11 +223,11 @@ const Calendar: React.FC<DatePikerProps> = ({
                     <button disabled={disabledYear} onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer font-titr'}>
                         {currentMonth.year}
                     </button>
-                    <button disabled={disabledMonth || disabledYear} className="disabled:hidden">
+                    <button disabled={disabledMonth || disabledYear} className="disabled:hidden flex items-center justify-center">
 
                         <ChevronLeftIcon onClick={handleNext} className="size-10 text-gray-500  absolute left-0  disabled:hidden" />
                     </button>
-                    <button className="disabled:hidden" disabled={disabledMonth || disabledYear}>
+                    <button className="disabled:hidden flex items-center justify-center" disabled={disabledMonth || disabledYear}>
 
                         <ChevronRightIcon onClick={handlePrev} className="size-10 text-gray-500 absolute right-0  disabled:hidden" />
                     </button>
