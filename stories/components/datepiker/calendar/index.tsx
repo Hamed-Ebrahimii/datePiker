@@ -257,8 +257,6 @@ const Calendar: React.FC<DatePikerProps> = ({
                             return (
                                 <div key={day.valueOf()} className=''>
                                     <Day
-
-
                                         weekendOffStyle={weekendOffStyle}
                                         isSelected={isSelected}
                                         isPastDay={isPastDay}
