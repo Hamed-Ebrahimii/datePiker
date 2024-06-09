@@ -14,7 +14,6 @@ export interface DatePikerProps {
     datePiker  : boolean ,
     weekStartDayIndex? : 0 |  1| 2| 3 |4| 5| 6 ,
     weekDayString? : string[] ,
-    
     multipleChoice?  : boolean,
     displayMonthAndYearName? : boolean,
     disablingThePreviousDay? : boolean ,
@@ -22,19 +21,19 @@ export interface DatePikerProps {
     maxDate? : string,
     holidays? : string[]
     weekendOff? : boolean,
-    weekendOffStyle? : string,
+    weekendOffStyle? : CSSProperties,
     disableOutOfRangeDays? : boolean
     disablePastDays : boolean
-    activeDayStyle?: string;
-    inactiveDayStyle?: string;
-    holidayStyle?: string;
-    selectedDayStyle?: string;
+    activeDayStyle?: CSSProperties;
+    inactiveDayStyle?: CSSProperties;
+    holidayStyle?: CSSProperties;
+    selectedDayStyle?: CSSProperties;
     rangeStartDayBorder?: string;
     rangeEndDayBorder?: string;
     dayItemSize?: string | number;
     monthYearStyle?: CSSProperties;
     monthYearClassName? : string
-    weekDayStyle?: string;
+    weekDayStyle?: CSSProperties;
     dayStyle? : CSSProperties;
     dayClassName ? : string;
     inputClassName? : string;
@@ -45,5 +44,11 @@ export interface DatePikerProps {
     weekdaysStyle? : CSSProperties;
     weekdaysClassName? : string; 
     isRange ? : boolean
-    // disableWeekendSelection? : boo
+    NumberOfMonths ? :1 | 2 | 3
+    showMonths ? : number[] 
+    rangeInMonth? : {
+        month : number,
+        startDay : number,
+        endDay : number
+    }
 }
