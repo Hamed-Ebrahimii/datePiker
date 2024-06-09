@@ -54,10 +54,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     });
 
     const handleMonthChange = (monthIndex: number) => {
-        setCurrentMonth(new DateObject({
-            calendar: calendar === 'persian' ? persian : undefined,
-            locale: calendar === 'persian' ? persian_fa : undefined
-        }).set('month', monthIndex).toFirstOfMonth());
+        setCurrentMonth(new DateObject(currentMonth).set('month', monthIndex).toFirstOfMonth());
         setShowMonth(false);
     };
 
