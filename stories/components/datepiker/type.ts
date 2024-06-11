@@ -1,4 +1,4 @@
-import {CSSProperties, ReactNode} from "react";
+import {CSSProperties, Dispatch, ReactNode, SetStateAction} from "react";
 import {DateObject} from "react-multi-date-picker";
 
 export interface DatePikerProps {
@@ -54,4 +54,9 @@ export interface DatePikerProps {
     disabledMonth ? : boolean
     disabledYear ? : boolean,
     calendarStyle? : CSSProperties 
+    startDate : DateObject | null
+    endDate : DateObject | null
+    setEndDate: Dispatch<SetStateAction<DateObject | null>>
+    setStartDate: Dispatch<SetStateAction<DateObject | null>>
+    listDate : DateObject[]
 }

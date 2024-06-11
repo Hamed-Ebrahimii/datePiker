@@ -40,12 +40,16 @@ const Calendar: React.FC<DatePikerProps> = ({
     rangeInMonth,
     disabledMonth,
     disabledYear,
-    calendarStyle
+    calendarStyle,
+    startDate , 
+    endDate,
+    setStartDate ,
+    setEndDate,
+    listDate
 }) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
-    const [startDate, setStartDate] = useState<DateObject | null>(null);
-    const [endDate, setEndDate] = useState<DateObject | null>(null);
+   
     const [currentMonth, setCurrentMonth] = useState(new DateObject({
         calendar: calendar === 'persian' ? persian : undefined,
         locale: calendar === 'persian' ? persian_fa : undefined,
@@ -108,12 +112,13 @@ const Calendar: React.FC<DatePikerProps> = ({
                     setEndDate(date);
                     const datesInRange = getDatesInRange(startDate, date);
                     setDateObject(datesInRange);
-                    setValue && setValue([startDate, date]);
+                    setValue && setValue(datesInRange);
                 }
             } else {
                 setStartDate(date);
                 setEndDate(null);
                 setDateObject([date]);
+                setValue([date])
             }
         } else {
             setStartDate(null);
@@ -197,9 +202,15 @@ const Calendar: React.FC<DatePikerProps> = ({
         for (let week = 0; week < stop; week++) {
             for (let day = 0; day < 7; day++) {
                 const dayObject = new DateObject(firstVisibleDay).add(week * 7 + day, "day")
+            if(min && min.valueOf() <= dayObject.valueOf()){
+                days.push(dayObject);
+
+            }
+            else {
                 days.push(dayObject);
             }
         }
+    }
         return days;
     };
     const calendarDays = generateCalendarDays();
@@ -243,11 +254,11 @@ const Calendar: React.FC<DatePikerProps> = ({
                             const isHoliday = holidayList?.find(item => day.format() === item.format());
                             const isOutOfRange = disableOutOfRangeDays && day.month.index !== currentMonth.month.index;
                             const isPastDay = disablePastDays && day.valueOf() < today.valueOf();;
-                            const isSelected = dateObject?.find(item => item.format() === day.format()) ? true : false;
+                            const isSelected = listDate?.find(item => item.format() === day.format()) ? true : false;
                             return (
                                 <div key={day.valueOf()} className=''>
                                     <Day
-                                    calendarType={calendar}
+                                        calendarType={calendar}
                                         weekendOffStyle={weekendOffStyle}
                                         isSelected={isSelected}
                                         isPastDay={isPastDay}
@@ -267,7 +278,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                                         dayStyle={dayStyle}
                                         range_end={endDate?.daysLeft === day.daysLeft}
                                         range_start={startDate?.daysLeft === day.daysLeft}
-                                        
+                                        isRange={isRange}
                                     />
                                 </div>
                             );
