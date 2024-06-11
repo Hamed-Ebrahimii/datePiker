@@ -6,6 +6,7 @@ import Day from "./day";
 import { DatePikerProps } from "../type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { useDidUpdate } from "@mantine/hooks";
+import { convertEnglishNumbersToPersian, convertPersianNumbersToEnglish } from "@/utils/convertPersianNumberToEnglish";
 
 const Calendar: React.FC<DatePikerProps> = ({
     calendar,
@@ -131,7 +132,7 @@ const Calendar: React.FC<DatePikerProps> = ({
             <div className="w-full grid grid-cols-4 mt-6 gap-4">
                 {years.map(year => (
                     <button className={yearClassName} style={yearStyle} key={year} onClick={() => handleYearChange(year)}>
-                        {year}
+                        {calendar === 'persian' ? convertEnglishNumbersToPersian(String(year)) : convertPersianNumbersToEnglish(String(year))}
                     </button>
                 ))}
             </div>
@@ -209,8 +210,8 @@ const Calendar: React.FC<DatePikerProps> = ({
                     <button disabled={disabledMonth} onClick={() => { setShowMonth(true); setShowYear(false); }} className={'cursor-pointer '}>
                         {currentMonth.month.name}
                     </button>
-                    <button disabled={disabledYear} onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer font-titr'}>
-                        {currentMonth.year}
+                    <button disabled={disabledYear} onClick={() => { setShowMonth(false); setShowYear(true); }} className={'cursor-pointer '}>
+                        {calendar === 'persian' ? convertEnglishNumbersToPersian(String(currentMonth.year)) : convertPersianNumbersToEnglish(String(currentMonth.year))}
                     </button>
                     <button disabled={disabledMonth || disabledYear} className="disabled:hidden flex items-center justify-center">
 
