@@ -38,7 +38,8 @@ const Calendar: React.FC<DatePikerProps> = ({
     dayClassName,
     rangeInMonth,
     disabledMonth,
-    disabledYear
+    disabledYear,
+    calendarStyle
 }) => {
     const [showMonth, setShowMonth] = useState(false);
     const [showYear, setShowYear] = useState(false);
@@ -202,7 +203,7 @@ const Calendar: React.FC<DatePikerProps> = ({
     };
     const calendarDays = generateCalendarDays();
     return (
-        <div className={`w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
+        <div style={calendarStyle} className={`w-10/12 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 bg-white rounded-lg shadow-sm`}>
             {displayMonthAndYearName && (
                 <div className={`w-full py-2 flex items-center justify-center gap-3 text-xl font-medium relative ${monthYearStyle}`}>
                     <button disabled={disabledMonth} onClick={() => { setShowMonth(true); setShowYear(false); }} className={'cursor-pointer '}>
@@ -264,7 +265,7 @@ const Calendar: React.FC<DatePikerProps> = ({
                                         dayStyle={dayStyle}
                                         range_end={endDate?.daysLeft === day.daysLeft}
                                         range_start={startDate?.daysLeft === day.daysLeft}
-
+                                        
                                     />
                                 </div>
                             );

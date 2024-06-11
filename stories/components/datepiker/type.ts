@@ -52,5 +52,6 @@ export interface DatePikerProps {
         endDay : number
     }
     disabledMonth ? : boolean
-    disabledYear ? : boolean
+    disabledYear ? : boolean,
+    calendarStyle? : CSSProperties 
 }

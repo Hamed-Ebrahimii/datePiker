@@ -28,10 +28,12 @@ export interface DayProps {
 
 const Day = ({date , disable , holiday , weekendOff , weekendOffStyle , isOutOfRange , isPastDay , isSelected , onClick  , activeDayStyle , selectedDayStyle , inactiveDayStyle , holidayStyle , dayItemSize , rangeStartDayBorder , rangeEndDayBorder , range_end , range_start , dayStyle  , isRange , dayClassName , outOfRange} : DayProps) =>{
     const isDisabled = disable   || isOutOfRange || isPastDay 
-    console.log(disable , holiday ,isOutOfRange , isPastDay )
     const className = ` w-full py-2 text-gray-800  hover:bg-green-dark hover:text-white flex items-center justify-center  disabled:opacity-50 ${holiday && 'text-red-500'} ${range_start && 'rounded-r-full'} ${range_end && 'rounded-l-full'}  ${!isRange && 'rounded-sm'} ${outOfRange && 'hidden'} ${weekendOff && 'text-red-500'} ${isSelected && ' bg-green-dark text-white'}`
+    const style = (weekendOff && weekendOffStyle) || (isSelected && selectedDayStyle) || (holiday && holidayStyle) || (isOutOfRange && inactiveDayStyle) || (isPastDay && inactiveDayStyle) || dayStyle
+    
+    
     return (
-        <button onClick={onClick} disabled={isDisabled} style={dayStyle || weekendOffStyle || selectedDayStyle || holidayStyle || inactiveDayStyle || activeDayStyle} className={className}>
+        <button onClick={onClick} disabled={isDisabled} style={style} className={className}>
                 <p className="font-medium font-titr ">
                 {
                     date.day
